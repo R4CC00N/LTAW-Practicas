@@ -4,3 +4,9 @@
 ### proyeto de RACCOON 
 
 en este readme podemos ver como funciona la escritura y los commits visuales.
+
+*************************************
+****         #2do CAMBIO        *****
+*************************************
+
+Prueba:1
