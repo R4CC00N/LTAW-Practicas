@@ -16,3 +16,7 @@ Prueba:1
 *************************************
 
 Prueba:2
+
+![](Foto_perfil.jpeg)
+
+Ejercicio 4
