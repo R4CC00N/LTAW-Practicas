@@ -1,86 +1,73 @@
+//RACCOON
+//NODE TIENDA.JS
 
-//-- Definir el puerto a utilizar
-const PUERTO = 9090;
-
-// constantes que requiere el back
+//Importando módulos
+const path = require('path');
 const http = require('http');
 const fs = require('fs');
-const url = require('url');
 
-//-- Fichero a leer
-const FICHERO = 'main.html';
+//Definición del puerto
+const PUERTO = 9090;
 
+function ok200(res,data,tipo){
 
-// crear path o slices
-function info_req(req) {
-  // posibles mensajes de consola...
-  const myURL = new URL(req.url, 'http://' + req.headers['host']);
-  console.log("URL completa: " + myURL.href);
-  console.log("  Ruta: " + myURL.pathname);
-
-  return myURL;
-}
-  
-
-
-function error404(res){
-  // se puede añadir el codigo 404 y el mensaje error
-  // poner enlace a pagina de error
-  res.writeHead(404,{'Contente-Type':'text/html'});
-  direccion = "error.html";
-  data = fs.readFileSync(direccion);
-  //-- Mensaje del cuerpo            
+  res.writeHead(200, {'Content-Type': tipo});
+  console.log("Peticion Recibida, 200 OK");
   res.write(data);
-  //-- Terminar la respuesta y enviarla
   res.end();
-  console.log("Error!!")
-}
 
-function ok200(res,data,extension){
-  res.writeHead(200,{'Contente-Type':extension});
-  // se puede añadir el codigo 200 y el mensaje ok
-  //-- Mensaje del cuerpo            
+};
+function error404(res,data,tipo){
+
+  res.writeHead(404,{'Content-Type': tipo})
+  console.log("Petición rechazada: 404 Not Found");
+  resource = "html/error.html";
+  data = fs.readFileSync(resource);
   res.write(data);
-  //-- Terminar la respuesta y enviarla
   res.end();
+
+};
+
+function info(req){
+  //Construir objeto url con la url de la solicitud
+  let url = req.url==='/'?'/main.html':req.url;
+  const resource = path.join(__dirname,url);
+  
+  return resource;
 }
 
-//-- Crear el servidor
-const server = http.createServer((req, res) => {
 
-  // lamada a la funcion que toma la informacion del URL
-  let url = info_req(req);
-  let extension = "";
-  let recurso = "";
-  
+//Creación del servidor
+const server = http.createServer(function(req, res) {
 
-  if (req.method == 'GET'){
+  //console.log("Petición recibida");
 
-    if (url.pathname != "/ls"){
+  direccion = info(req);
 
-      if (url.pathname == "/"){
-        extension += "main.html";
-        recurso += url.pathname.slice(1,);
-      }
-      fs.readFile(recurso, 'utf8', (err, data) => {
-    
-        if (err) {  //-- Ha ocurrido algun error
-          error404(res)
-        } 
-        else {  //-- Lectura normal
-          ok200(res,data,extension)
-        }
-      });
-    } 
-    else{
-      ok200(res,data,extension)
-    }
+  //Tipos de archivo
+  const tipo = {
+    "html" : "text/html",
+    "jpeg" : "image/jpeg",
+    "jpg" : "image/jpg",
+    "png" : "image/png",
+    "PNG" : "image/PNG",
+    "ico" : "image/ico",
+    "css" : "text/css",
+  };
 
-  }
+  //Lectura sincrona
+  fs.readFile(direccion, function(err,data) {
+    //Fichero no encontrado
+    if (err){
+      //Lanza error
+      error404(res,data,tipo);
+
+    }else{
+
+      ok200(res,data,tipo);
+    }     
+  });
 });
 
-
-//-- Activar el servidor: ¡Que empiece la fiesta!
 server.listen(PUERTO);
-
-console.log("Happy server activado!. Escuchando en puerto: " + PUERTO);
+console.log("Servidor de la tienda online escuchando en puerto: " + PUERTO) 
