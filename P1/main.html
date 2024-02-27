@@ -4,26 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/ico" href="img/icon.ico"/> 
+    <link rel="stylesheet" type="text/css" href="tienda.css">
     <title>TTC</title>
 </head>
 <body>
     <h1>TU TIENDA DE CONFIANZA</h1>
-    <a href="keyboards.html">
-        <button>
-            <img src="img/keyboard.png" alt="Pagina de keyboard">
-        </button>
-    </a>
 
-    <a href="monitors.html">
-        <button>
+    <div id="productos" class="fila">
+        <div class="columna">
+            <img src="img/keyboard.png" alt="Pagina de keyboard">
+            <a href="keyboards.html">
+                <button id="obj" class="slide_right">
+                    TECLADOS
+                </button>
+            </a>
+        </div>
+        <div class="columna"> 
             <img src="img/monitor.png" alt="Pagina de monitors">    
-        </button>
-    </a>
-    <a href="mouses.html">
-        <button>
+            <a href="monitors.html">
+                <button id="obj" class="slide_right">
+                    MONITORES
+                </button>
+            </a>
+        </div>
+        <div class="columna">
             <img src="img/mouse.png" alt="Pagina de mouses">    
-        </button>
-    </a>
+            <a href="mouses.html">
+                <button id="obj" class="slide_right">
+                    RATONES
+                </button>
+            </a>
+        </div>
+    </div>
+    
     
 </body>
 </html>
