@@ -1,0 +1,65 @@
+{
+    "usuarios":
+    [
+        {
+            "nombre":"root",
+            "real": "main",
+            "email": "main@root.com"
+        },
+        {
+            "nombre":"raccoon",
+            "real": "raccoon",
+            "email": "raccoon@github.com"
+        }
+    ],
+    "productos":
+    [
+        {
+            "nombre":"monitor",
+            "descripcion": "producto1",
+            "stock": "20"
+        },
+        
+        {
+            "nombre":"raton",
+            "descripcion": "producto2",
+            "stock": "20"
+        },
+        {
+            "nombre":"teclado",
+            "descripcion": "producto3",
+            "stock": "20"
+        }
+    ],
+    "pedidos":[
+        {
+          "nombre": "root",
+          "id": "987654321",
+          "direccion": "ÑEÑEÑEÑE",
+          "productos": [
+            {
+                "producto": "raton",
+                "importe":"120 euros",
+                "unidades": 1
+            },
+            {
+                "producto": "teclado",
+                "importe":"80 euros",
+                "unidades": 1
+            }
+         ]
+        },
+        {
+          "nombre": "raccoon",
+          "id": "123456789",
+          "direccion": "AÑAÑAÑAÑA",
+          "productos": [
+            {
+                "producto": "monitor",
+                "importe": "300 euros",
+                "unidades": 1
+            }
+         ]
+        }
+      ]
+}
