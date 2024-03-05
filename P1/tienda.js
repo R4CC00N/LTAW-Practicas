@@ -5,6 +5,8 @@
 const path = require('path');
 const http = require('http');
 const fs = require('fs');
+const pag_error = "error.html"
+const pag_404 = fs.readFileSync(pag_error);
 
 //Definición del puerto
 const PUERTO = 9090;
@@ -13,16 +15,6 @@ function ok200(res,data,tipo){
 
   res.writeHead(200, {'Content-Type': tipo});
   console.log("Peticion Recibida, 200 OK");
-  res.write(data);
-  res.end();
-
-};
-function error404(res,data,tipo){
-
-  res.writeHead(404,{'Content-Type': tipo})
-  console.log("Petición rechazada: 404 Not Found");
-  resource = "html/error.html";
-  data = fs.readFileSync(resource);
   res.write(data);
   res.end();
 
@@ -60,7 +52,11 @@ const server = http.createServer(function(req, res) {
     //Fichero no encontrado
     if (err){
       //Lanza error
-      error404(res,data,tipo);
+      console.log("Error!!")
+      console.log(err.message);
+      
+      res.write(pag_404);
+      res.end();
 
     }else{
 
