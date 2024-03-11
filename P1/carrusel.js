@@ -32,6 +32,7 @@ function showSlider(type){
         thumbnailBorderDom.prepend(thumbnailItemsDom[thumbnailItemsDom.length - 1]);
         carouselDom.classList.add('prev');
     }
+    
     clearTimeout(runTimeOut);
     runTimeOut = setTimeout(() => {
         carouselDom.classList.remove('next');
