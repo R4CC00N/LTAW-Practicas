@@ -11,38 +11,81 @@ const FICHERO_JSON = "tienda.json"
 const tienda_json = fs.readFileSync(FICHERO_JSON);
 const usuarios = JSON.parse(tienda_json).usuarios;
 const productos = JSON.parse(tienda_json).productos;
+const  ProductoDescripcion= fs.readFileSync('main.html','utf-8');
+
+const img = "";
 
 //Definición del puerto
 const PUERTO = 9090;
 
 
+function ShowDescription(){
+  let htmlProductos = '';
+  productos.forEach(producto => {
+    htmlProductos += `
+    <h1 class="producto">${producto.nombre}</h1>
+    <p class="text">${producto.descripcion}</p>
+    <a href="${producto.nombre.toLowerCase()}.html">
+    <button class="obj">Ver ofertas</button>
+    </a>,`;
+  });
+  return htmlProductos;
+}
+
 function InfoUser(req) {
   const cookie = req.headers.cookie;
   if (cookie) {
-      console.log("cookie: ",cookie)
       let pares = cookie.split(";");
       let user;
+      let imagenes;
       pares.forEach((element, index) => {
           let [nombre, valor] = element.split('=');
           if (nombre.trim() === 'user') {
               user = valor;
           }
+          if (nombre.trim() === 'imagenes') {
+            imagenes = valor;
+        }
       });
       return user || null;
   }
 
 }
 
+function ok200description(res,tipo,user){
+const producto1=ProductoDescripcion.replace('<!-- PRODUCT1_PLACEHOLDER -->', ShowDescription().split(",")[0]);
+const producto2=producto1.replace('<!-- PRODUCT2_PLACEHOLDER -->', ShowDescription().split(",")[1]);
+const producto3=producto2.replace('<!-- PRODUCT3_PLACEHOLDER -->', ShowDescription().split(",")[2]);
 
-function ok200(res,data,tipo,user){
-   // cookie vacia
-  //res.setHeader('Set-Cookie', 'user=');
+  // cookie vacia
+ //res.setHeader('Set-Cookie', 'user=');
+
+ if (user) {
+   
+  content = producto3.replace('<!--HOLA USUARIO-->', `<h3>Bienvenido: ${user}</h3>`);
+  console.log("Peticion Recibida, 200 OK");
+  res.writeHead(200, {'Content-Type': tipo});
+  res.write(content);
+  res.end();
+ }  
+ else{
   res.writeHead(200, {'Content-Type': tipo});
   console.log("Peticion Recibida, 200 OK");
+  res.write(producto3);
+  res.end();
+ }
+
+};
+function ok200(res,data,tipo){
+
+  console.log("Peticion Recibida, 200 OK");
+  res.writeHead(200, {'Content-Type': tipo});
   res.write(data);
   res.end();
 
+
 };
+
 
 function info(req){
   //Construir objeto url con la url de la solicitud
@@ -58,7 +101,8 @@ const server = http.createServer(function(req, res) {
 
   //console.log("Petición recibida");
 
-  direccion = info(req);
+  const direccion = info(req);
+  let user = InfoUser(req);
 
   //Tipos de archivo
   const tipo = {
@@ -76,7 +120,6 @@ const server = http.createServer(function(req, res) {
   if (req.url == '/procesar') {
     
     // AQUI VA LA ACCION DE VER EL USUARIO Y LA CONTRASEÑA
-
     let body="";
     content_type = "text/html";
     content = RESPUESTA;
@@ -99,6 +142,7 @@ const server = http.createServer(function(req, res) {
         console.log("Nombre usuario:", username);
         console.log("Contraseña:", password);
         const userExists = usuarios.find(user => user.nombre_usuario === username && user.password === password);
+        
         if (userExists) {
           res.setHeader('Set-Cookie', `user=${username}`);
           res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -117,7 +161,7 @@ const server = http.createServer(function(req, res) {
     });
 
   }
-  else{
+  else {
     //Lectura sincrona
     fs.readFile(direccion, function(err,data) {
       //Fichero no encontrado
@@ -129,20 +173,22 @@ const server = http.createServer(function(req, res) {
         res.write(pag_404);
         res.end();
 
-      }else{
-        let user = InfoUser(req);
-        if (user) {
-          res.writeHead(200, {'Content-Type': tipo});
-          console.log("Peticion Recibida, 200 OK");
-          res.write('<h3 style="font-family: verdana; color: #b4b4b4;"> Bienvenido ' + user + '</h3>');
-          res.write(data);
-          res.end();
-        }  
-        else{
-          ok200(res,data,tipo,user)
+      }
+
+      else{
+
+        if(req.url === "/"|| req.url==="/main.html")
+        {
+          ok200description(res,tipo,user);
+          
         }
+        else{
+          ok200(res,data,tipo);
+        }
+
+      }
         
-      }     
+       
     });
   }
 });

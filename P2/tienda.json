@@ -17,20 +17,20 @@
     "productos":
     [
         {
-            "nombre":"monitor",
+            "nombre":"monitores",
             "descripcion": "producto1",
             "stock": "20",
             "precio":"30"
         },
         
         {
-            "nombre":"raton",
+            "nombre":"laptops",
             "descripcion": "producto2",
             "stock": "20",
             "precio":"30"
         },
         {
-            "nombre":"teclado",
+            "nombre":"perifericos",
             "descripcion": "producto3",
             "stock": "20",
             "precio":"30"
