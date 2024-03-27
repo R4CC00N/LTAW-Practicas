@@ -6,6 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="login.css">
+  <script src="login.js"></script>
   <title>LOGIN</title>
   
 </head>
@@ -21,9 +22,12 @@
       </div>
   
       <!-- Login Form -->
-      <form>
-        <input type="text" id="login" class="fadeIn second" name="login" placeholder="email">
-        <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
+      <form action="/procesar" method="post">
+        <input type="text" id="username" class="fadeIn second" name="username" placeholder="user">
+        <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+        <span class="toggle-password" onclick="PasswordVisibility()">
+         <i class="fa fa-fw fa-eye "></i>
+        </span>
         <input type="submit" class="fadeIn fourth" value="Log In">
       </form>
   
