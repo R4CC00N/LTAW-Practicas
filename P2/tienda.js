@@ -13,12 +13,17 @@ const usuarios = JSON.parse(tienda_json).usuarios;
 const productos = JSON.parse(tienda_json).productos;
 const  ProductoDescripcion= fs.readFileSync('main.html','utf-8');
 
-const img = "";
-
 //Definición del puerto
 const PUERTO = 9090;
 
+//Funciones para el buscador
 
+
+////////////////////////////////////////////////////////////////
+
+
+
+// funcion para crear mensaje que mostrara la informacion de JSON
 function ShowDescription(){
   let htmlProductos = '';
   productos.forEach(producto => {
@@ -26,7 +31,7 @@ function ShowDescription(){
     <h1 class="producto">${producto.nombre}</h1>
     <p class="text">${producto.descripcion}</p>
     <a href="${producto.nombre.toLowerCase()}.html">
-    <button class="obj">Ver ofertas</button>
+    <button class="btn" class="obj">Ver ofertas</button>
     </a>,`;
   });
   return htmlProductos;

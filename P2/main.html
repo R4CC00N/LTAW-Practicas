@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/ico" href="img/icon.ico"/> 
-    <link rel="stylesheet" type="text/css" href="cssejemplo.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
     
     <title>TTC</title>
 </head>
@@ -13,18 +13,25 @@
     <h1 class="titulo" center >TU TIENDA DE CONFIANZA</h1>
     <div class="row">
       <div>
-        <span></span>
+        <button class="boton-action">
+          <a href="ProcesoPedido.html"> 🛒 </a>
+        </button>
       </div>
       
-      <div>
-        <span></span>
+      <div class="search-container">
+        <input type="text" id="search-input" placeholder="Buscar...">
+        <ul id="search-results"></ul>
       </div>
       <div>
         <nav>
-          <a href="login.html">LOG IN</a>
+          <button class="btn-log">
+          <a href="login.html">LOGIN 👤🟢</a>
+        </button>
         </nav>
         <nav>
-          <a href="" onclick="logout()">LOG OUT</a>
+        <button class="btn-log">
+          <a href="" onclick="logout()">LOGOUT 🔴</a>
+        </button>
         </nav> 
       </div>
     </div>
@@ -77,6 +84,6 @@
         </div>
     </div>
     </div>
-    <script src="main.js" defer></script>
+    <script src="main.js"></script>
 </body>
 </html>
