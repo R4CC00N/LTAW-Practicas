@@ -36,6 +36,88 @@
             "precio":"30"
         }
     ],
+    "objetos":[
+        {
+            "name": "AOC 25G3ZM 24.5 pulgadas",
+            "id": 0,
+            "price": 1100,
+            "category": "monitores",
+            "marca": "AOC",
+            "stock": 20,
+            "slogan": "Lo último",
+            "descripcion": "LED FullHD 240Hz FreeSync Premium",
+            "caracteristics": [
+               " Características principales",
+                "Resolución Full HD 1920x1080",
+                "Panel VA con contraste 3000:1",
+                "Tasa de refresco 240Hz",
+                "Tiempo de respuesta 1ms GTG",
+                "Tecnología FreeSync Premium",
+                "Diseño sin marco en 3 lados"
+            ],
+            "img": ["error404.png"]
+          },
+          {
+            "name": "ñeñeñe",
+            "id": 1,
+            "price": 1100,
+            "category": "laptops",
+            "marca": "AOC",
+            "stock": 20,
+            "slogan": "Lo último",
+            "descripcion": "LED FullHD 240Hz FreeSync Premium",
+            "caracteristics": [
+               " Características principales",
+                "Resolución Full HD 1920x1080",
+                "Panel VA con contraste 3000:1",
+                "Tasa de refresco 240Hz",
+                "Tiempo de respuesta 1ms GTG",
+                "Tecnología FreeSync Premium",
+                "Diseño sin marco en 3 lados"
+            ],
+            "img": ["error404.png"]
+          },
+          {
+            "name": "pepepepe",
+            "id": 2,
+            "price": 1100,
+            "category": "perifericos",
+            "marca": "AOC",
+            "stock": 20,
+            "slogan": "Lo último",
+            "descripcion": "LED FullHD 240Hz FreeSync Premium",
+            "caracteristics": [
+               " Características principales",
+                "Resolución Full HD 1920x1080",
+                "Panel VA con contraste 3000:1",
+                "Tasa de refresco 240Hz",
+                "Tiempo de respuesta 1ms GTG",
+                "Tecnología FreeSync Premium",
+                "Diseño sin marco en 3 lados"
+            ],
+            "img": ["error404.png"]
+          },
+          {
+            "name": "gagagagagaga",
+            "id": 3,
+            "price": 1100,
+            "category": "perifericos",
+            "marca": "AOC",
+            "stock": 20,
+            "slogan": "Lo último",
+            "descripcion": "LED FullHD 240Hz FreeSync Premium",
+            "caracteristics": [
+               " Características principales",
+                "Resolución Full HD 1920x1080",
+                "Panel VA con contraste 3000:1",
+                "Tasa de refresco 240Hz",
+                "Tiempo de respuesta 1ms GTG",
+                "Tecnología FreeSync Premium",
+                "Diseño sin marco en 3 lados"
+            ],
+            "img": ["error404.png"]
+          }
+    ],
     "pedidos":[
         {
           "nombre": "root",

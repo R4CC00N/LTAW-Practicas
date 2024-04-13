@@ -5,23 +5,59 @@
 const path = require('path');
 const http = require('http');
 const fs = require('fs');
+
+// contantes de ficheros html
 const pag_error = "error.html"
 const pag_404 = fs.readFileSync(pag_error);
+const  ProductoDescripcion= fs.readFileSync('main.html','utf-8');
+
+// constantes de ficheros JSON
 const FICHERO_JSON = "tienda.json"
-const tienda_json = fs.readFileSync(FICHERO_JSON);
+const tienda_json = fs.readFileSync(FICHERO_JSON,'utf-8');
 const usuarios = JSON.parse(tienda_json).usuarios;
 const productos = JSON.parse(tienda_json).productos;
-const  ProductoDescripcion= fs.readFileSync('main.html','utf-8');
+const OBJETOS = JSON.parse(tienda_json).objetos;
+
+
 
 //Definición del puerto
 const PUERTO = 9090;
 
-//Funciones para el buscador
-
 
 ////////////////////////////////////////////////////////////////
+function convert2Dic(params , split){
 
+  const dict = {};
+  for (let i = 0; i < params.length; i++){
+    param = params[i].split(split)
+    dict[param[0]] = param[1];
+  }
+  return dict
+}
+function getCookies(req){
+  let cookie = req.headers.cookie
+  if (cookie) {
+    cookie = cookie.replace(/\s/g, "");
+    cookie = cookie.split(";")
+    cookie = convert2Dic(cookie,"=")
+    return cookie
+  }else{
+    return {}
+  }
+}
 
+//BUSCAR LA PALABRA EN EL JSON
+
+function ShowSearch(){
+  let htmlProductos =  `  
+  <div class="searchDiv">
+  <input class="searchBar" placeholder="Busca un producto" type="text"/>
+  <div id="searchElements"></div>
+</div>
+<button class="logButtonSearch" onclick="productSearch()">🔎</button>
+  `;
+  return htmlProductos;
+}
 
 // funcion para crear mensaje que mostrara la informacion de JSON
 function ShowDescription(){
@@ -37,37 +73,38 @@ function ShowDescription(){
   return htmlProductos;
 }
 
-function InfoUser(req) {
+
+function InfoPost(req) {
   const cookie = req.headers.cookie;
   if (cookie) {
       let pares = cookie.split(";");
-      let user;
-      let imagenes;
+      let obj;
       pares.forEach((element, index) => {
           let [nombre, valor] = element.split('=');
           if (nombre.trim() === 'user') {
-              user = valor;
+              obj = valor;
           }
-          if (nombre.trim() === 'imagenes') {
-            imagenes = valor;
+          else if (nombre.trim() === 'buy') { // para carrito de compra
+            obj = valor;
         }
       });
-      return user || null;
+      return obj || null;
   }
 
 }
 
-function ok200description(res,tipo,user){
-const producto1=ProductoDescripcion.replace('<!-- PRODUCT1_PLACEHOLDER -->', ShowDescription().split(",")[0]);
-const producto2=producto1.replace('<!-- PRODUCT2_PLACEHOLDER -->', ShowDescription().split(",")[1]);
-const producto3=producto2.replace('<!-- PRODUCT3_PLACEHOLDER -->', ShowDescription().split(",")[2]);
 
+function ok200description(res,tipo,obj){
+  const Showsearch = ProductoDescripcion.replace('<!--SEARCH-CONTEINER-->', ShowSearch());
+  const producto1=Showsearch.replace('<!-- PRODUCT1_PLACEHOLDER -->', ShowDescription().split(",")[0]);
+  const producto2=producto1.replace('<!-- PRODUCT2_PLACEHOLDER -->', ShowDescription().split(",")[1]);
+  const data=producto2.replace('<!-- PRODUCT3_PLACEHOLDER -->', ShowDescription().split(",")[2]);
+  //data = manageMain(producto3, objetos ,cookies) 
   // cookie vacia
  //res.setHeader('Set-Cookie', 'user=');
-
- if (user) {
-   
-  content = producto3.replace('<!--HOLA USUARIO-->', `<h3>Bienvenido: ${user}</h3>`);
+ if (obj) {
+  content = data.replace('<!--HOLA USUARIO-->', `<h3>Bienvenido: ${obj}</h3>`);
+  
   console.log("Peticion Recibida, 200 OK");
   res.writeHead(200, {'Content-Type': tipo});
   res.write(content);
@@ -76,7 +113,7 @@ const producto3=producto2.replace('<!-- PRODUCT3_PLACEHOLDER -->', ShowDescripti
  else{
   res.writeHead(200, {'Content-Type': tipo});
   console.log("Peticion Recibida, 200 OK");
-  res.write(producto3);
+  res.write(data);
   res.end();
  }
 
@@ -102,12 +139,15 @@ function info(req){
 
 
 //Creación del servidor
+
+/////////////////////// MAIN //////////////////////////////
+
+
 const server = http.createServer(function(req, res) {
 
   //console.log("Petición recibida");
-
   const direccion = info(req);
-  let user = InfoUser(req);
+  let obj = InfoPost(req);
 
   //Tipos de archivo
   const tipo = {
@@ -121,8 +161,83 @@ const server = http.createServer(function(req, res) {
   };
 
   const RESPUESTA = fs.readFileSync('main.html', 'utf-8');
+  
+  recurso = req.url.split('?')[0];
 
-  if (req.url == '/procesar') {
+  console.log('dirccion: ',direccion);
+  console.log('req: ',recurso);
+  console.log("URL: ",req.url)
+
+if(req.method=='GET'){
+  if(recurso =='/product'){
+    console.log("Peticion de Productos!")
+    content_type = "application/json";
+    console.log("  url: " +  direccion);
+
+//-- Leer los parámetros
+    let nameDir = req.url.split('?')[1];
+    let nameOp = nameDir.split('=')[0]
+    let nameProduct = nameDir.split('=')[1];
+
+    if(nameOp == 'names'){
+      nameProduct = nameProduct.toUpperCase();
+
+     //console.log("  Nombre Producto: " +  nameProduct);
+
+      let result = [];
+
+      for (let prod of OBJETOS) {
+          //console.log('nombres: ',prod.name)
+          //-- Pasar a mayúsculas
+          prodU = prod.name.toUpperCase();
+          console.log('nombres: ',prodU)
+          //-- Si el producto comienza por lo indicado en el parametro
+          //-- meter este producto en el array de resultados
+          if (prodU.startsWith(nameProduct)) {
+              result.push([prod.name,prod.category]);
+          }
+          
+      }
+      console.log('resultados: ',result);
+      content = JSON.stringify(result);
+      ok200(res,content,tipo);
+    }
+  }
+  else {
+    // Lectura sincrona
+    fs.readFile(direccion, function(err,data) {
+      //Fichero no encontrado
+      if (err){
+        //Lanza error
+        console.log("Error!!")
+        console.log(err.message);
+        
+        res.write(pag_404);
+        res.end();
+      }
+
+      else{
+        // si es main me hace la deteccion del json PAGINA DINAMICA
+        
+        if(req.url === "/"|| req.url==="/main.html")
+        {
+          cookies = getCookies(req)
+          ok200description(res,tipo,obj);
+          //console.log('cookies: ',cookies)
+          //console.log('OBJETOS: ',OBJETOS)
+          
+        }
+        else{
+          ok200(res,data,tipo);
+        }
+
+      }
+    });
+  }
+
+}
+else{
+if (req.url == '/procesar') {
     
     // AQUI VA LA ACCION DE VER EL USUARIO Y LA CONTRASEÑA
     let body="";
@@ -146,7 +261,7 @@ const server = http.createServer(function(req, res) {
 
         console.log("Nombre usuario:", username);
         console.log("Contraseña:", password);
-        const userExists = usuarios.find(user => user.nombre_usuario === username && user.password === password);
+        const userExists = usuarios.find(obj => obj.nombre_usuario === username && obj.password === password);
         
         if (userExists) {
           res.setHeader('Set-Cookie', `user=${username}`);
@@ -167,7 +282,7 @@ const server = http.createServer(function(req, res) {
 
   }
   else {
-    //Lectura sincrona
+    // Lectura sincrona
     fs.readFile(direccion, function(err,data) {
       //Fichero no encontrado
       if (err){
@@ -177,14 +292,17 @@ const server = http.createServer(function(req, res) {
         
         res.write(pag_404);
         res.end();
-
       }
 
       else{
-
+        // si es main me hace la deteccion del json PAGINA DINAMICA
+        
         if(req.url === "/"|| req.url==="/main.html")
         {
-          ok200description(res,tipo,user);
+          cookies = getCookies(req)
+          ok200description(res,tipo,obj);
+          // console.log('cookies: ',cookies)
+          // console.log('OBJETOS: ',OBJETOS)
           
         }
         else{
@@ -192,11 +310,11 @@ const server = http.createServer(function(req, res) {
         }
 
       }
-        
-       
     });
   }
+}
 });
 
 server.listen(PUERTO);
 console.log("Servidor de la tienda online escuchando en puerto: " + PUERTO) 
+
