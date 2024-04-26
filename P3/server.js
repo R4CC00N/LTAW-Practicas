@@ -15,6 +15,48 @@ const server = http.Server(app);
 //-- Crear el servidor de websockets, asociado al servidor http
 const io = new socketServer(server);
 
+
+// FUNCIONES 
+
+
+//-- Funcion para mostrar mensajes --//
+function MostrarConsola(msg , id){
+    console.log("**********************************".white)
+    console.log("mensaje completo: ", msg)
+    console.log("Mensaje recibido: ".magenta)
+    console.log("origin id: ".red + id.yellow)
+    console.log("**********************************".white)
+  
+  }
+
+//--- Funcion para comandos especiales ---//
+function specialCommand(comand){
+    switch(comand){
+  
+      case "/help":
+          console.log('help')
+          break;
+  
+      case "/list":
+        console.log('lista??')
+          break;
+  
+      case "/hello":
+        console.log('hola')
+          break;
+  
+      case "/date":
+        console.log('fecha')
+          break;
+  
+      default:
+        console.log('nop')
+          break;
+  }
+  
+  }
+  
+
 //-------- PUNTOS DE ENTRADA DE LA APLICACION WEB
 //-- Definir el punto de entrada principal de mi aplicación web
 app.get('/', (req, res) => {
@@ -33,6 +75,7 @@ app.use(express.static('public'));
 io.on('connect', (socket) => {
   
   console.log('** NUEVA CONEXIÓN **'.yellow);
+  // nombre usuario AQUI
 
   //-- Evento de desconexión
   socket.on('disconnect', function(){
@@ -42,9 +85,15 @@ io.on('connect', (socket) => {
   //-- Mensaje recibido: Reenviarlo a todos los clientes conectados
   socket.on("message", (msg)=> {
     console.log("Mensaje Recibido!: " + msg.blue);
+    MostrarConsola(msg , socket.id)
 
     //-- Reenviarlo a todos los clientes conectados
     io.send(msg);
+    if (msg[0] == "/"){
+        //console.log('socket: ',socket)
+        specialCommand(msg)
+      
+    }
   });
 
 });
