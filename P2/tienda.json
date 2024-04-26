@@ -5,13 +5,43 @@
             "nombre_usuario":"root",
             "password":"root",
             "real": "main",
-            "email": "main@root.com"
+            "email": "main@root.com",
+            "pedidos":
+                {
+                  "card": "987654321",
+                  "direccion": "ÑEÑEÑEÑE",
+                  "productospedidos": [
+                    {
+                        "producto": "raton",
+                        "precio":"120 euros",
+                        "unidades": 1
+                    },
+                    {
+                        "producto": "teclado",
+                        "precio":"80 euros",
+                        "unidades": 1
+                    }
+                 ]
+                }
+              
         },
         {
             "nombre_usuario":"raccoon",
             "password":"1234",
             "real": "raccoon",
-            "email": "raccoon@github.com"
+            "email": "raccoon@github.com",
+            "pedidos":
+                {
+                  "card": "123456789",
+                  "direccion": "AÑAÑAÑAÑA",
+                  "productospedidos": [
+                    {
+                        "producto": "monitor",
+                        "importe": "300 euros",
+                        "unidades": 1
+                    }
+                 ]
+                }
         }
     ],
     "productos":
@@ -58,7 +88,7 @@
             "img": ["error404.png"]
           },
           {
-            "name": "ñeñeñe",
+            "name": "pedro",
             "id": 1,
             "price": 1100,
             "category": "laptops",
@@ -117,36 +147,5 @@
             ],
             "img": ["error404.png"]
           }
-    ],
-    "pedidos":[
-        {
-          "nombre": "root",
-          "NumeroTarjeta": "987654321",
-          "direccion": "ÑEÑEÑEÑE",
-          "productospedidos": [
-            {
-                "producto": "raton",
-                "precio":"120 euros",
-                "unidades": 1
-            },
-            {
-                "producto": "teclado",
-                "precio":"80 euros",
-                "unidades": 1
-            }
-         ]
-        },
-        {
-          "nombre": "raccoon",
-          "NumeroTarjeta": "123456789",
-          "direccion": "AÑAÑAÑAÑA",
-          "productospedidos": [
-            {
-                "producto": "monitor",
-                "importe": "300 euros",
-                "unidades": 1
-            }
-         ]
-        }
-      ]
+    ]
 }
