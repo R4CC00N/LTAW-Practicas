@@ -7,13 +7,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="/socket.io/socket.io.js"></script>
   <script type="text/javascript" src="index.js" defer></script>
+  <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
+  <div class="wrapper">
+
     <div id="login">
         <p>Inserta un nombre de usuario</p>
         <input type="text" id="userName" placeholder="User"/>
-        <button onclick="login()" id="userButton">Go to chat</button>
+        <div>
+          <button onclick="login()" id="userButton">Go to chat</button>
+        </div>
     </div>
+
+  </div>
+
     <p id="TextoRespuesta"></p>
 </body>

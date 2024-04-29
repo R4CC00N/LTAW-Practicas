@@ -1,0 +1,214 @@
+body {
+    background: linear-gradient(15deg, #6bb3ca 50%, #65c1c7 50.1%);
+  
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+  }
+
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+    padding: 20px;
+  }
+
+  #login {
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background: #fff;
+    padding: 30px;
+    width: 90%;
+    max-width: 450px;
+    position: relative;
+    padding: 0px;
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    text-align: center;
+  }
+
+#login div button{
+
+    background-color: #56baed;
+    border: none;
+    color: white;
+    padding: 15px 80px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 13px;
+    -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+    box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    margin: 5px 20px 40px 20px;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  #login div button:hover{
+    background-color: #39ace7;
+  }
+  
+  #login div button:active{
+    -moz-transform: scale(0.95);
+    -webkit-transform: scale(0.95);
+    -o-transform: scale(0.95);
+    -ms-transform: scale(0.95);
+    transform: scale(0.95);
+  }
+  
+  input[type=text]{
+    background-color: #f6f6f6;
+    border: none;
+    color: #0d0d0d;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    margin: 10px;
+    width: 70%;
+    border: 2px solid #f6f6f6;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+  }
+  
+  input[type=text]:focus {
+    background-color: #fff;
+    border-bottom: 2px solid #5f64e9;
+  }
+  
+  input[type=text]:placeholder {
+    color: #3f3f3f;
+  }
+
+  #login p{
+    text-align: left; 
+    font-weight: bold; 
+    font-size: 20px; 
+    color: #5bc6dc; 
+    text-align: center;
+  }
+  /* SE TERMINA EL INDEX EMPEZAMOS CON EL CHAT */
+
+  #contenedor{
+    display: flex;
+    align-items: center;
+    flex-direction: column; 
+    justify-content: center;
+    width: 100%;
+    min-height: 100%;
+    padding: 20px;
+  }
+/* ------------------ USUARIOS --------------------- */
+  #ListaUsuarios{
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background: #534c4c46;
+    padding: 30px;
+    width: 70%;
+    max-width: 450px;
+    position: relative;
+    padding: 0px;
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(255, 255, 255, 0.718);
+    text-align: center;
+  }
+  #ListaUsuarios h2{
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin-bottom: 5px;
+    border-radius: 10px 10px 10px 10px;
+    border-bottom: 3px rgb(163, 255, 110) solid;
+    background: linear-gradient(rgb(20, 51, 57), rgb(44, 98, 110));
+    color: floralwhite;
+  }
+  /*conectDot*/
+  #ListaUsuarios .userChat{
+    padding-bottom: 10px;
+    padding-top: 10px;
+    display: flex;
+    margin: auto;
+    flex-direction: row;
+    text-align: center;
+    border-radius: 10px 10px 10px 10px;
+    border-bottom: 5px rgba(0, 0, 0, 0.623) solid;
+    transition: background-color 0.15s , box-shadow 1s;
+  }
+
+#ListaUsuarios .userChat .userNameUserChat{
+    margin: auto;
+    margin-left: 10%;
+    font-weight: 600;
+    font-size: 130%;
+}
+#ListaUsuarios .userChat .connectDot{
+    color: greenyellow;
+    margin: auto;
+    margin-right: 10%;
+    font-size: 200%;
+    font-weight: 900;
+}
+/* ------------------ CHAT GENERAL --------------------- */
+.ChatWindow{
+    margin-top: 40px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border-radius: 10px 10px 10px 10px;
+    background: linear-gradient(rgb(20, 51, 57), rgb(44, 98, 110));
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding: 0px;
+    -webkit-box-shadow: 0 30px 60px 0 rgba(255, 0, 0, 0.3);
+    box-shadow: 0 30px 60px 0 rgba(255, 255, 255, 0.718);
+    text-align: center;
+    color: white;
+}
+.ChatWindow #typeChat{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right:0 ;
+    z-index: 1;
+    margin: auto;
+    border-radius: 32px 32px 32px 32px;
+    text-align: center;
+    width: 75%;
+    height: 50px;
+    background: linear-gradient(rgb(35, 89, 100), rgb(58, 129, 145));
+}
+.ChatWindow #typeChat #typeChatTitle{
+    height: fit-content;
+    margin: auto;
+    margin-top: 1.25%;
+    font-size: 150%;
+    font-weight: 700;
+    width: fit-content;
+    height: fit-content;
+}
+.ChatWindow #ChatSpace{
+    margin: auto;
+    background: linear-gradient(rgb(37, 66, 72), rrgb(90, 130, 139));
+    border: 0% 1% 1% 1% solid #0b0b0b79;
+    box-sizing: border-box;
+    border-radius: 0 16px 0 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}

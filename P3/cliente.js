@@ -118,7 +118,7 @@ socket.on("chatList", (msg)=>{
   for (let i = 0; i < list.length ; i++) {
     if (USERNAME != list[i].name){
       if (STATE_BASE[list[i].id] == undefined){STATE_BASE[list[i].id] = "<div class='invisibleDiv'></div>" }
-      ListaUsuariosDiv.innerHTML +=  "<div class='userChat' id='"+list[i].id+"' onclick=TypeChat('" + list[i].id + "') > <p class='userNameUserChat'>" + list[i].name+ "</p> <p id='unread'></p> <p class='greenDot'> · </p> </div>"
+      ListaUsuariosDiv.innerHTML +=  "<div class='userChat' id='"+list[i].id+"' onclick=TypeChat('" + list[i].id + "') > <p class='userNameUserChat'>" + list[i].name+ "</p> <p id='unread'></p> <p class='connectDot'> · </p> </div>"
     }
   }
 
