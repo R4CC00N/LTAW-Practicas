@@ -25,28 +25,7 @@ button.onclick = () => {
   sendMessage()
 }
 
-// --  FUNCION PARA MANDAR MENSAJE AL SERVIDOR ATADO A UN EVENTO CON "emit"
-function sendMessage(){
 
-  msg = input.value
-  date = FechaHora()
-  if(msg != ""){
-    input.value = ""
-    STATE_BASE[STATE] += "<div class='TypeMessageServer2'> <p class='TimeText'> <span class='userName'> Tú </span>  <span class='messDate'>" + FechaHora() + "</span>  </p>   <p class='chatText'>" + msg + "</p></div>"
-    ChatSpace.innerHTML = STATE_BASE[STATE]
-    socket.emit("message" , [ STATE,USERNAME,msg])
-    ChatSpace.scrollTop = ChatSpace.scrollHeight;
-  }
-}
-
-function FechaHora(){
-  var date = new Date();
-  var hour = date.getHours().toString().padStart(2, '0');
-  var minutes = date.getMinutes().toString().padStart(2, '0');
-  return hour + ":" + minutes
-}
-
-// para que nos lea el caso de general debemos ver si usamos en CHAT GENERAL o no
 function TypeChat(id){
   STATE = id
   ChatSpace.innerHTML = STATE_BASE[id]
@@ -70,9 +49,32 @@ function TypeChat(id){
       }
     }
   }
+
+
 }
 
-// PARA LEER LOS MENSAJES DEL SERVIDOR QUE HAN SIDO EMITIDO CON "SOCKET.EMIT"
+// --  FUNCION PARA MANDAR MENSAJE AL SERVIDOR ATADO A UN EVENTO CON "emit"
+function sendMessage(){
+
+  msg = input.value
+  date = FechaHora()
+  if(msg != ""){
+    input.value = ""
+    STATE_BASE[STATE] += "<div class='TypeMessageServer2'> <p class='TimeText'> <span class='userName'> Tú </span>  <span class='messDate'>" + FechaHora() + "</span>  </p>   <p class='chatText'>" + msg + "</p></div>"
+    ChatSpace.innerHTML = STATE_BASE[STATE]
+    socket.emit("message" , [ STATE,USERNAME,msg])
+    ChatSpace.scrollTop = ChatSpace.scrollHeight;
+  }
+}
+
+function FechaHora(){
+  var date = new Date();
+  var hour = date.getHours().toString().padStart(2, '0');
+  var minutes = date.getMinutes().toString().padStart(2, '0');
+  return hour + ":" + minutes
+}
+
+
 
 socket.on("message", (msg)=>{
   msg = JSON.parse(msg)
@@ -105,5 +107,20 @@ socket.on("message", (msg)=>{
     ChatSpace.scrollTop = ChatSpace.scrollHeight;
   }
   
+});
+
+
+socket.on("chatList", (msg)=>{
+
+  list = JSON.parse(msg)
+  ListaUsuarios = list
+  ListaUsuariosDiv.innerHTML = "<div class='userChat' id='general' onclick=TypeChat('general') > <p class='userNameUserChat'> General </p>  <p id='unread'></p> </div>"
+  for (let i = 0; i < list.length ; i++) {
+    if (USERNAME != list[i].name){
+      if (STATE_BASE[list[i].id] == undefined){STATE_BASE[list[i].id] = "<div class='invisibleDiv'></div>" }
+      ListaUsuariosDiv.innerHTML +=  "<div class='userChat' id='"+list[i].id+"' onclick=TypeChat('" + list[i].id + "') > <p class='userNameUserChat'>" + list[i].name+ "</p> <p id='unread'></p> <p class='greenDot'> · </p> </div>"
+    }
+  }
+
 });
 

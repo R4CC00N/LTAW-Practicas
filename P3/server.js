@@ -57,10 +57,15 @@ function MostrarConsola(msg , id){
     console.log("origin id: ".red + id.yellow)
     console.log("origin name: ".red + msg[1].yellow)
     console.log("Destination id: ".green + msg[0].yellow)
+    console.log("Destination name: ".green + msg[1].yellow)
+    if (msg[0] == "general"){
+        console.log("Message content: ".blue + msg[2].yellow)
+    }else{
+        console.log("Message content: ".blue + "CHAT PRIVADO".red)
+    }
     console.log("**********************************".white)
   
   }
-
 
 //-- Trabajar mensaje --//
 function trocearMensaje(msg){
@@ -157,6 +162,23 @@ app.use(express.static('public'));
 //------------------- GESTION SOCKETS IO
 //-- Evento: Nueva conexion recibida
 io.on('connect', (socket) => {
+    
+  // para login
+socket.on("connect_login", (msg)=> {
+    console.log('Nueva conexión: '.green)
+    console.log(" Nombre del Usuario: " + msg.yellow + "id: "+ socket.id.blue )
+    
+    // para conocer los nombres de los clientes y su ID
+    clients.push({name: msg , id: socket.id})
+  
+    socket.broadcast.emit("message",JSON.stringify(["general","server", "Se ha conectado: " + msg]));
+    
+    // enviamos el evento chatlist que le llegara al usuario
+    io.emit("chatList", JSON.stringify(clients));
+    
+    
+    socket.emit("message", JSON.stringify(["general", "server" ,saludo + msg+ ", bienvenido!!" ]) );
+  });
   
   console.log('** NUEVA CONEXIÓN **'.yellow);
   // nombre usuario AQUI
