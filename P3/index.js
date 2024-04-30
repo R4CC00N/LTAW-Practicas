@@ -21,7 +21,6 @@ function login() {
 
             // AQUI SE PUEDE AGREGAR COSAS PARA EL CSS
         } else if (m.status == 404) {
-            
             console.log("Error")
             document.getElementById("TextoRespuesta").innerHTML =  ""
             document.getElementById("TextoRespuesta").innerHTML =  "<p id='TextoRespuesta' >" + m.responseText + "</p>"

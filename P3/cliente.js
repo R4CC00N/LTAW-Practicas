@@ -60,7 +60,7 @@ function sendMessage(){
   date = FechaHora()
   if(msg != ""){
     input.value = ""
-    STATE_BASE[STATE] += "<div class='TypeMessageServer2'> <p class='TimeText'> <span class='userName'> Tú </span>  <span class='messDate'>" + FechaHora() + "</span>  </p>   <p class='chatText'>" + msg + "</p></div>"
+    STATE_BASE[STATE] += "<div class='TypeMessage2'> <p class='TimeText'> <span class='userName'> Tú </span>  <span class='messDate'>" + FechaHora() + "</span>  </p>   <p class='chatText'>" + msg + "</p></div>"
     ChatSpace.innerHTML = STATE_BASE[STATE]
     socket.emit("message" , [ STATE,USERNAME,msg])
     ChatSpace.scrollTop = ChatSpace.scrollHeight;
@@ -80,20 +80,20 @@ socket.on("message", (msg)=>{
   msg = JSON.parse(msg)
   new_message = ""
   if (msg[1] == "server"){
-    STATE_BASE[msg[0]] += "<div class='TypeMessageServer3'> <p class='userName'>----------- servidor ---------</p>  <p class='chatText' >" + msg[2] + "</p> <p>"+FechaHora()+"</p>  </div>"
+    STATE_BASE[msg[0]] += "<div class='TypeMessage3'> <p class='userName'>----------- servidor ---------</p>  <p class='chatText' >" + msg[2] + "</p> <p>"+FechaHora()+"</p>  </div>"
     let flag = msg[3]
     if (flag != undefined || flag !=""){
       if(flag == "disconect"){
         let discoUser = msg[4]
         if( STATE == discoUser){
-          ChatSpace.innerHTML += "<div class='TypeMessageServer3'> <p class='userName'>Server</p>  <p class='chatText' >" + msg[2] + " ,cambia de chat para seguir chateando</p> <p>"+FechaHora()+"</p>  </div>"
+          ChatSpace.innerHTML += "<div class='TypeMessage3'> <p class='userName'>Server</p>  <p class='chatText' >" + msg[2] + " ,cambia de chat para seguir chateando</p> <p>"+FechaHora()+"</p>  </div>"
         }
       }
     }
 
   }else{
     // AGREGAR SONIDO AQUI
-    STATE_BASE[msg[0]] += "<div class='TypeMessageServer1'> <p class='TimeText'> <span class='userName'>"+ msg[1] +"</span> <span class='messDate'>"+FechaHora()+"</span>  </p> <p class='chatText' >"+ msg[2] +"</p> </div>"
+    STATE_BASE[msg[0]] += "<div class='TypeMessage1'> <p class='TimeText'> <span class='userName'>"+ msg[1] +"</span> <span class='messDate'>"+FechaHora()+"</span>  </p> <p class='chatText' >"+ msg[2] +"</p> </div>"
   }
 
 
