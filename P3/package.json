@@ -1,0 +1,17 @@
+{  "name": "chat-proyect",
+"description": "Mi proyeto de chat",
+"version": "1.0.0",
+"main": "index.js",
+"scripts": {
+    "start": "node server.js"
+},
+"author": "PABLO ESTEBAN CAMUENDO CARLOSAMA (RACCOON)' ",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "electron": "^30.0.2",
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5",
+    "websocket": "^1.0.34",
+    "wscat": "^5.2.0"
+  }
+}

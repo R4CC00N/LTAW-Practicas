@@ -156,6 +156,9 @@ app.post('/login', (req, res) => {
 //-- biblioteca socket.io para el cliente
 app.use('/', express.static(__dirname +'/'));
 
+//-- El directorio publico contiene ficheros estáticos
+app.use(express.static('public'));
+
 //------------------- GESTION SOCKETS IO
 //-- Evento: Nueva conexion recibida
 io.on('connect', (socket) => {

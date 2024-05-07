@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title> CHATEA PAAA </title>
+  <link rel="icon" type="image/ico" href="/icon.ico"/>   
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="/socket.io/socket.io.js"></script>
+  <script type="text/javascript" src="index.js" defer></script>
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <div class="wrapper">
+
+    <div id="login">
+        <p>Inserta un nombre de usuario</p>
+        <input type="text" id="userName" placeholder="User"/>
+        <div>
+          <button onclick="login()" id="userButton">Go to chat</button>
+        </div>
+    </div>
+
+  </div>
+
+    <p id="TextoRespuesta"></p>
+</body>

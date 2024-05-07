@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>CHAT SERVER</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="hud.css" defer> 
+  <script  src="hud.js" defer></script>
+  <script  src="hud_ui.js" defer></script>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self';" />
+</head>
+
+<body>
+    <div id="infoChat">
+        
+        <div  id="infoUser">
+            <p class="infoTextTittle">Usuarios conectados:  <p id="ConectedNum"> </p>  </p>
+            <p class="infoTextTittle">Lista de usuarios conectados: <p id="UserList"></p>
+        </div>
+
+        <div id="chatPanel">
+           
+            <div id="msgPanel">
+                <input type="text" id="inputWrite"/>
+                <button id="sendButton"> ▷ </button>
+                <input type="button" value="Test"  id="testButton"/>
+            </div>
+        </div>
+    </div>
+    <div id="infoServer">
+        <div id="infoVersion">
+            <h3 class="infoTextTittle">Versiones</h3>
+            <p class="infoText">Version de node: <p class="infoTextData" id="nodeText"><!--REPLACE_NODE_VERSION--></p></p> 
+            <p class="infoText">Version de chrome: <p class="infoTextData" id="chromeText"><!--REPLACE_NODE_CHROME--></p></p>
+            <p class="infoText">Version de electron: <p class="infoTextData" id="electronText"><!--REPLACE_NODE_ELECTRON--></p></p>
+            <p class="infoText">Version del server: <p class="infoTextData" >1.0.0</p></p>
+        </div>
+        <div>
+            <p class="infoTextTittle">URL lanzada en </p>
+            <p id="replaceURL" class="infoTextUrl"></p>
+        </div>
+    </div>
+
+
+</body>

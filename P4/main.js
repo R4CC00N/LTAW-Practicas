@@ -4,6 +4,30 @@ const http = require('http');
 const express = require('express');
 const colors = require('colors');
 const fs = require('fs');
+const ip = require('ip');
+
+//http://localhost:9090/
+
+//-- Cargar el módulo de electron
+const electron = require('electron');
+
+console.log("Arrancando electron...");
+
+//-- Variable para acceder a la ventana principal
+//-- Se pone aquí para que sea global al módulo principal
+let win = null;
+
+//-- Punto de entrada. En cuanto electron está listo,
+//-- ejecuta esta función
+electron.app.on('ready', () => {
+    console.log("Evento Ready!");
+    
+    
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+              /*AQUI INTRODUCIMOS TODO LO DEL SERVER.JS*/
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 
 const PUERTO = 9090;
 
@@ -17,7 +41,7 @@ const server = http.Server(app);
 const io = new socketServer(server);
 
 
-const CHAT_HTML =  fs.readFileSync('userChat.html', 'utf-8')
+const CHAT_HTML =  fs.readFileSync('public/userChat.html', 'utf-8')
 let clients = []
 
 // MENSAJES PARA CASOS
@@ -117,7 +141,6 @@ function specialCommand(comand, socket , nameClient ,idClient){
   
   }
   
-  
 
 //-------- PUNTOS DE ENTRADA DE LA APLICACION WEB
 //-- Definir el punto de entrada principal de mi aplicación web
@@ -155,27 +178,33 @@ app.post('/login', (req, res) => {
 //-- Esto es necesario para que el servidor le envíe al cliente la
 //-- biblioteca socket.io para el cliente
 app.use('/', express.static(__dirname +'/'));
+//-- El directorio publico contiene ficheros estáticos
+app.use(express.static('public'));
 
 //------------------- GESTION SOCKETS IO
 //-- Evento: Nueva conexion recibida
 io.on('connect', (socket) => {
     
   // para login
-socket.on("connect_login", (msg)=> {
-    console.log('Nueva conexión: '.green)
-    console.log(" Nombre del Usuario: " + msg.yellow + "id: "+ socket.id.blue )
+  socket.on("connect_login", (msg)=> {
+      console.log('Nueva conexión: '.green)
+      console.log(" Nombre del Usuario: " + msg.yellow + "id: "+ socket.id.blue )
+      
+      // para conocer los nombres de los clientes y su ID
+      clients.push({name: msg , id: socket.id})
     
-    // para conocer los nombres de los clientes y su ID
-    clients.push({name: msg , id: socket.id})
-  
-    socket.broadcast.emit("message",JSON.stringify(["general","server", "Se ha conectado: " + msg]));
-    
-    // enviamos el evento chatlist que le llegara al usuario
-    io.emit("chatList", JSON.stringify(clients));
-    
-    
-    socket.emit("message", JSON.stringify(["general", "server" ,saludo + msg+ ", bienvenido!!" ]) );
-  });
+      socket.broadcast.emit("message",JSON.stringify(["general","server", "Se ha conectado: " + msg]));
+      
+      // enviamos el evento chatlist que le llegara al usuario
+      io.emit("chatList", JSON.stringify(clients));
+      
+      
+      socket.emit("message", JSON.stringify(["general", "server" ,saludo + msg+ ", bienvenido!!" ]) );
+
+      // para la ventana nueva
+      win.webContents.send('Connected' ,clients)
+      win.webContents.send('ChatGeneral' , ["general","server", "Se ha conectado: " + msg])
+    });
   
   console.log('** NUEVA CONEXIÓN **'.yellow);
   // nombre usuario AQUI
@@ -186,7 +215,9 @@ socket.on("connect_login", (msg)=> {
     filtered_clients = []
     for (let i = 0; i <  clients.length; i++){
         if (clients[i].id == socket.id){
-            io.emit("message", JSON.stringify([ "general", "server" ,"Se ha desconectado  " + clients[i].name ,"disconect" ,socket.id]));
+          // para la ventana nueva
+          win.webContents.send('ChatGeneral' , ["general","server", "Se ha desconectado: " + clients[i].name])
+          io.emit("message", JSON.stringify([ "general", "server" ,"Se ha desconectado  " + clients[i].name ,"disconect" ,socket.id]));
         }else{
             filtered_clients.push(clients[i])
         }
@@ -194,6 +225,9 @@ socket.on("connect_login", (msg)=> {
     }
     clients = filtered_clients
     io.emit("chatList", JSON.stringify(clients));
+
+    // para la ventana nueva
+    win.webContents.send('Connected' ,clients)
 });  
 
 
@@ -212,7 +246,10 @@ socket.on("connect_login", (msg)=> {
           
         }else{
             if (trozos[0] == "general"){
-                socket.broadcast.emit("message",JSON.stringify(msg));
+              socket.broadcast.emit("message",JSON.stringify(msg));
+
+              // para ventana nueva
+              win.webContents.send('ChatGeneral' , msg)
 
             }else{
 
@@ -230,3 +267,45 @@ socket.on("connect_login", (msg)=> {
 //-- ¡Que empiecen los juegos de los WebSockets!
 server.listen(PUERTO);
 console.log("Escuchando en puerto: " + PUERTO);
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+/*
+
+                        CREACION DE LA VENTANA
+
+*/
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+    //-- Crear la ventana principal de nuestra aplicación
+    win = new electron.BrowserWindow({
+      width: 900,   //-- Anchura 
+      height: 800,  //-- Altura
+
+      //-- Permitir que la ventana tenga ACCESO AL SISTEMA
+      webPreferences: {
+        nodeIntegration: true,
+        contextIsolation: false
+      }
+  });
+
+  win.on('ready-to-show', () => {
+
+    win.webContents.send('Connected' ,clients)
+    win.webContents.send('conectionInformation' , JSON.stringify([ip.address(), PUERTO]))
+})
+
+  electron.ipcMain.handle('serverMess',(event,msg) => {
+    io.emit("message", JSON.stringify([ "general", "server" ,msg]));
+  });
+
+  win.setMenuBarVisibility(false)
+  win.setIcon("HUD/hud_p1.jpeg");
+  win.loadFile("HUD/hud.html")
+
+
+});
+
+
+/////////////////////////////////////////////////////////////////////////////////////
