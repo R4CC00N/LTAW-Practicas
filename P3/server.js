@@ -163,7 +163,7 @@ io.on('connect', (socket) => {
   // para login
 socket.on("connect_login", (msg)=> {
     console.log('Nueva conexión: '.green)
-    console.log(" Nombre del Usuario: " + msg.yellow + "id: "+ socket.id.blue )
+    console.log(" Nombre del Usuario: " + msg.yellow + "  id: "+ socket.id.blue )
     
     // para conocer los nombres de los clientes y su ID
     clients.push({name: msg , id: socket.id})
@@ -203,6 +203,7 @@ socket.on("connect_login", (msg)=> {
     MostrarConsola(msg , socket.id)
 
     let trozos = trocearMensaje(msg)
+    console.log('trozos: ',trozos)
     //id,name,msgtext,msgCmd
     
         if (trozos[3] == "/"){
@@ -216,8 +217,8 @@ socket.on("connect_login", (msg)=> {
 
             }else{
 
-                destinatary = trozos[0]
-                trozos[0] = socket.id
+                destinatary = msg[0]
+                msg[0] = socket.id
                 io.to(destinatary).emit('message', JSON.stringify(msg));
             }
             
