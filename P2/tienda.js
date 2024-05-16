@@ -10,7 +10,6 @@ const fs = require('fs');
 const pag_error = "error.html"
 const pag_404 = fs.readFileSync(pag_error);
 const  ProductoDescripcion= fs.readFileSync('main.html','utf-8');
-const DIRECTORY =  fs.readFileSync('searchPage.html','utf-8');
 
 // constantes de ficheros JSON
 const FICHERO_JSON = "tienda.json"
@@ -19,7 +18,6 @@ const tienda_json = fs.readFileSync(FICHERO_JSON,'utf-8');
 const usuarios = JSON.parse(tienda_json).usuarios;
 const productos = JSON.parse(tienda_json).productos;
 const OBJETOS = JSON.parse(tienda_json).objetos;
-
 
 
 //Definición del puerto
@@ -73,11 +71,12 @@ function ShowDescription(){
   productos.forEach(producto => {
     htmlProductos += `
     <h1 class="producto">${producto.nombre}</h1>
-    <p class="text">${producto.descripcion}</p>
+    <p class="text"> ${producto.descripcion} </p>
     <a href="${producto.nombre.toLowerCase()}.html">
-    <button class="btn" class="obj">Ver ofertas</button>
+    <button class="btn"> Ver ofertas </button>
     </a>,`;
   });
+
   return htmlProductos;
 }
 
@@ -175,6 +174,7 @@ function findProductById(id){
   });
   return element
 }
+
 function checkIDExists(search){
   let found = false
   OBJETOS.map(function(elemento) {
@@ -212,7 +212,7 @@ function userOK(user,password,usuarios){
 }
 async function manageCart(data,cookies , callback){
   data = data.toString()
-  if(cookies['userName'] != null){
+  if(cookies['user'] != null){
     if(cookies['cart'] != null && cookies['cart'].length != 0  ){
       fs.readFile("cartProduct.html", (err, component) => { 
         if(!err){
@@ -227,8 +227,8 @@ async function manageCart(data,cookies , callback){
             let stock = cartCookie[key]
             let componentData = findProductById(id)
             newComponent = newComponent.replace("TITTLE",componentData.name);
-            newComponent = newComponent.replace(/REPLACE_ID/g,id);
-            newComponent = newComponent.replace(/PRICEUNIT/g, String(componentData.price));
+            newComponent = newComponent.replace(/REPLACE_ID/,id);
+            newComponent = newComponent.replace(/PRICEUNIT/, String(componentData.price));
             newComponent = newComponent.replace("value='0'", "value='" + stock+"'");
             newComponent = newComponent.replace("TOTALPRICE", String(Number(stock) * Number(componentData.price)));
             newComponent = newComponent.replace("replaceMAX", componentData.stock);
@@ -416,7 +416,8 @@ if(req.method=='GET'){
     });
   }else if (recurso == '/addCart'){
     let nameDir = req.url.split('?')[1];
-    let product = nameDir.split('=')[0]
+    let product = nameDir.split('=')[1]
+    console.log("IDPRODUCTO",product)
     cookies = getCookies(req)
     if (checkIDExists(product)){
       if(cookies['cart']  == null || cookies['cart']  == "" ){

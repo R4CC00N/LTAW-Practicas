@@ -44,24 +44,25 @@
                 }
         }
     ],
+    
     "productos":
     [
         {
             "nombre":"monitores",
-            "descripcion": "Lo mejor en monitores para el uso domestico, gaming o laboral.",
+            "descripcion": "Lo mejor en monitores para ti y tu familia.",
             "stock": "20",
             "precio":"30"
         },
         
         {
             "nombre":"laptops",
-            "descripcion": "Lo mejor en Laptops o portatiles para el uso domestico, gaming o laboral.",
+            "descripcion": "Lo mejor en Laptops para ti y tu familia.",
             "stock": "20",
             "precio":"30"
         },
         {
             "nombre":"perifericos",
-            "descripcion": "Lo mejor en perifericos como teclados, auriculares, ratones.",
+            "descripcion": "Lo mejor en perifericos para ti y tu familia.",
             "stock": "20",
             "precio":"30"
         }
@@ -85,7 +86,7 @@
                 "Tecnología FreeSync Premium",
                 "Diseño sin marco en 3 lados"
             ],
-            "img": ["error404.png"]
+            "img": ["img/aoc.jpeg"]
           },
           {
             "name": "pedro",

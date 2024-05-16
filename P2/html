@@ -1,0 +1,20 @@
+<div class="item">
+    <img class="fondo" src="${objeto.img}">
+    <div class="content">
+        <div class="name">${objeto.category}</div>
+        <div class="title">${objeto.name}</div>
+        <div class="topic">${objeto.descripcion} </div>
+        <div class="des">
+            <h1>${objeto.caracteristics[0]}</h1>
+               <li>${objeto.caracteristics[1]}</li> 
+               <li>${objeto.caracteristics[2]}</li>
+               <li>${objeto.caracteristics[3]}</li>
+               <li>${objeto.caracteristics[4]}</li>
+               <li>${objeto.caracteristics[5]}</li>
+               <li>${objeto.caracteristics[6]}</li>
+        </div>
+        <div class="buttons">
+            <button class=replaceClass id="productButton"> ADD 🛒 </button>
+        </div>
+    </div>
+</div>
