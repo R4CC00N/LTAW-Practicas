@@ -6,15 +6,10 @@
         <div class="topic">${objeto.descripcion} </div>
         <div class="des">
             <h1>${objeto.caracteristics[0]}</h1>
-               <li>${objeto.caracteristics[1]}</li> 
-               <li>${objeto.caracteristics[2]}</li>
-               <li>${objeto.caracteristics[3]}</li>
-               <li>${objeto.caracteristics[4]}</li>
-               <li>${objeto.caracteristics[5]}</li>
-               <li>${objeto.caracteristics[6]}</li>
+               ${objeto.caracteristics[1]}
         </div>
         <div class="buttons">
-            <button class=replaceClass id="productButton"> ADD 🛒 </button>
+            <button class=replaceClass id="productButton" onclick="addToCart(${objeto.id})"> ADD 🛒 </button>
         </div>
     </div>
 </div>

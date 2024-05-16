@@ -69,84 +69,184 @@
     ],
     "objetos":[
         {
-            "name": "AOC 25G3ZM 24.5 pulgadas",
+            "name": "ASUS 25G3ZM 24.5 plg",
             "id": 0,
-            "price": 1100,
+            "price": 250,
             "category": "monitores",
-            "marca": "AOC",
+            "marca": "ASUS",
             "stock": 20,
             "slogan": "Lo último",
-            "descripcion": "LED FullHD 240Hz FreeSync Premium",
+            "descripcion": "OLED FullHD 140Hz",
             "caracteristics": [
-               " Características principales",
-                "Resolución Full HD 1920x1080",
-                "Panel VA con contraste 3000:1",
-                "Tasa de refresco 240Hz",
-                "Tiempo de respuesta 1ms GTG",
-                "Tecnología FreeSync Premium",
-                "Diseño sin marco en 3 lados"
+                "Características principales",
+                "<li>Resolución Full HD 1920x1080</li><li>Panel VA con contraste 3000:1</li><li>Tasa de refresco 240Hz</li><li>Tiempo de respuesta 1ms GTG</li><li>Tecnología FreeSync Premium</li><li>Diseño sin marco en 3 lados</li>"
             ],
             "img": ["img/aoc.jpeg"]
           },
           {
-            "name": "pedro",
+            "name": "LG LIVE 25 plg",
             "id": 1,
-            "price": 1100,
-            "category": "laptops",
-            "marca": "AOC",
+            "price": 150,
+            "category": "monitores",
+            "marca": "LG",
             "stock": 20,
             "slogan": "Lo último",
-            "descripcion": "LED FullHD 240Hz FreeSync Premium",
+            "descripcion": "LED FullHD 1920x1080",
             "caracteristics": [
                " Características principales",
-                "Resolución Full HD 1920x1080",
-                "Panel VA con contraste 3000:1",
-                "Tasa de refresco 240Hz",
-                "Tiempo de respuesta 1ms GTG",
-                "Tecnología FreeSync Premium",
-                "Diseño sin marco en 3 lados"
+               "<li>Resolución Full HD 1920x1080</li><li>Panel VA con contraste 3000:1</li><li>Tasa de refresco 240Hz</li><li>Tiempo de respuesta 1ms GTG</li><li>Tecnología FreeSync Premium</li><li>Diseño sin marco en 3 lados</li>"
             ],
-            "img": ["error404.png"]
+            "img": ["img/LGLive.jpg"]
           },
           {
-            "name": "pepepepe",
+            "name": "OMEN X35 24.5 plg",
             "id": 2,
-            "price": 1100,
-            "category": "perifericos",
-            "marca": "AOC",
+            "price": 300,
+            "category": "monitores",
+            "marca": "OMEN",
             "stock": 20,
             "slogan": "Lo último",
-            "descripcion": "LED FullHD 240Hz FreeSync Premium",
+            "descripcion": "OLED 4K",
             "caracteristics": [
                " Características principales",
-                "Resolución Full HD 1920x1080",
-                "Panel VA con contraste 3000:1",
-                "Tasa de refresco 240Hz",
-                "Tiempo de respuesta 1ms GTG",
-                "Tecnología FreeSync Premium",
-                "Diseño sin marco en 3 lados"
+               "<li>Resolución Full HD 1920x1080</li><li>Panel VA con contraste 3000:1</li><li>Tasa de refresco 240Hz</li><li>Tiempo de respuesta 1ms GTG</li><li>Tecnología FreeSync Premium</li><li>Diseño sin marco en 3 lados</li>"
             ],
-            "img": ["error404.png"]
+            "img": ["img/omenx35.jpg"]
           },
           {
-            "name": "gagagagagaga",
+            "name": "LG 2XZ0 24 plg",
             "id": 3,
-            "price": 1100,
-            "category": "perifericos",
-            "marca": "AOC",
+            "price": 1500,
+            "category": "monitores",
+            "marca": "LG",
             "stock": 20,
             "slogan": "Lo último",
             "descripcion": "LED FullHD 240Hz FreeSync Premium",
             "caracteristics": [
                " Características principales",
-                "Resolución Full HD 1920x1080",
-                "Panel VA con contraste 3000:1",
-                "Tasa de refresco 240Hz",
-                "Tiempo de respuesta 1ms GTG",
-                "Tecnología FreeSync Premium",
-                "Diseño sin marco en 3 lados"
+               "<li>Resolución Full HD 1920x1080</li><li>Panel VA con contraste 3000:1</li><li>Tasa de refresco 240Hz</li><li>Tiempo de respuesta 1ms GTG</li><li>Tecnología FreeSync Premium</li><li>Diseño sin marco en 3 lados</li>"
             ],
-            "img": ["error404.png"]
+            "img": ["img/LG2.webp"]
+          },
+          {
+            "name": "TECLADO MECANICO LOGITEC V33",
+            "id": 4,
+            "price": 1500,
+            "category": "perifericos",
+            "marca": "LOGITEC",
+            "stock": 20,
+            "slogan": "Lo último",
+            "descripcion": "RGB",
+            "caracteristics": [
+               " Características principales",
+               "<li>Resolución Full HD 1920x1080</li><li>Panel VA con contraste 3000:1</li><li>Tasa de refresco 240Hz</li><li>Tiempo de respuesta 1ms GTG</li><li>Tecnología FreeSync Premium</li><li>Diseño sin marco en 3 lados</li>"
+            ],
+            "img": ["img/perifericos.jpg"]
+          },
+          {
+            "name": "RAZER ALL IN ONE",
+            "id": 5,
+            "price": 1500,
+            "category": "perifericos",
+            "marca": "RAZER",
+            "stock": 20,
+            "slogan": "Lo último",
+            "descripcion": "TECLADO Y PALANCA",
+            "caracteristics": [
+               " Características principales",
+               "<li>Función de bloqueo de tecla windows (game mode)</li><li>Switch: Content Mechanical</li><li>Distancia total Switch: 4mm</li><li>Fuerza de Trabajo: 50 ±10 gf</li><li>Fuerza Tactil: 60 ± 15 gf</li><li>Tipo de switch: Rojo</li><li>Vida útil: 50 millones de pulsaciones aseguradas.</li><li>Número total de teclas: 105</li><li>Anti-ghosting completo en todas las teclas</li>"
+            ],
+            "img": ["img/todo_in_1_perifericos.webp"]
+          },
+          {
+            "name": "XV43 RAZER  TECLADO ",
+            "id": 6,
+            "price": 1500,
+            "category": "perifericos",
+            "marca": "RAZER",
+            "stock": 20,
+            "slogan": "Lo último",
+            "descripcion": "MECANICO RGB",
+            "caracteristics": [
+               " Características principales",
+               "<li>Teclado mecánico 60%</li><li>Switches azules</li><li>Admite 9 tipos de modos de luz</li><li>Impresión láser</li><li>Número de teclas: 68 teclas</li><li>Layout: Español</li><li>Cable tipo C de 1,5 m</li><li>Plug and Play</li><li>Batería recargable: 1000mAh </li><li>Medidas: 310 x 101 x 36 mm</li>"
+            ],
+            "img": ["img/teclado_razer.jpg"]
+          },
+          {
+            "name": "COMBO DE PERIFERICOS",
+            "id": 7,
+            "price": 1500,
+            "category": "perifericos",
+            "marca": "ASUS",
+            "stock": 20,
+            "slogan": "Lo último",
+            "descripcion": "TECLADO, RATON Y AURICULARES",
+            "caracteristics": [
+               " Características principales",
+               "<h1>Características principales</h1><li>Teclado mecánico 60%, </li><li>Switches azules</li><li>Admite 9 tipos de modos de luz</li><li>Impresión láser</li><li>Número de teclas: 68 teclas</li><li>Layout: Español</li><li>Cable tipo C de 1,5 m</li><li>Plug and Play</li><li>Batería recargable: 1000mAh </li><li>Medidas: 310 x 101 x 36 mm</li>"
+            ],
+            "img": ["img/combo_perifericos.jpg"]
+          },
+          {
+            "name": "ROG ASUS ZM 22 plg",
+            "id": 8,
+            "price": 1500,
+            "category": "laptops",
+            "marca": "ASUS",
+            "stock": 20, 
+            "slogan": "Lo último",
+            "descripcion": "OLED FullHD 140Hz",
+            "caracteristics": [
+               " Características principales",
+               "<li>Resolución Full HD 1920x1080</li><li>Panel VA con contraste 3000:1</li><li>Tasa de refresco 240Hz</li><li>Tiempo de respuesta 1ms GTG</li><li>Tecnología FreeSync Premium</li><li>Diseño sin marco en 3 lados</li>"
+            ],
+            "img": ["img/asus_rog_laptop.jpg"]
+          },
+          {
+            "name": "APPLE LIVE UwU 25 plg",
+            "id": 9,
+            "price": 1500,
+            "category": "laptops",
+            "marca": "LG",
+            "stock": 20,
+            "slogan": "Lo último",
+            "descripcion": "OLED 1920x1080",
+            "caracteristics": [
+               " Características principales",
+               "<li>Resolución Full HD 1920x1080</li><li>Panel VA con contraste 3000:1</li><li>Tasa de refresco 240Hz</li><li>Tiempo de respuesta 1ms GTG</li><li>Tecnología FreeSync Premium</li><li>Diseño sin marco en 3 lados</li>"
+            ],
+            "img": ["img/laptop.jpg"]
+          },
+          {
+            "name": "X35 OMEN 18 plg",
+            "id": 10,
+            "price": 1500,
+            "category": "laptops",
+            "marca": "OMEN",
+            "stock": 20,
+            "slogan": "Lo último",
+            "descripcion": "OLED FullHD",
+            "caracteristics": [
+               " Características principales",
+               "<li>Resolución Full HD 1920x1080</li><li>Panel VA con contraste 3000:1</li><li>Tasa de refresco 240Hz</li><li>Tiempo de respuesta 1ms GTG</li><li>Tecnología FreeSync Premium</li><li>Diseño sin marco en 3 lados</li>"
+            ],
+            "img": ["img/gaming_laptop.jpg"]
+          },
+          {
+            "name": "ALIENWARE 20 plg",
+            "id": 11,
+            "price": 1500,
+            "category": "laptops",
+            "marca": "ALIENWARE",
+            "stock": 20,
+            "slogan": "Lo último",
+            "descripcion": "LED FullHD Premium",
+            "caracteristics": [
+               " Características principales",
+               "<li>Resolución Full HD 1920x1080</li><li>Panel VA con contraste 3000:1</li><li>Tasa de refresco 240Hz</li><li>Tiempo de respuesta 1ms GTG</li><li>Tecnología FreeSync Premium</li><li>Diseño sin marco en 3 lados</li>"
+            ],
+            "img": ["img/alienware_laptop.jpg"]
           }
     ]
 }

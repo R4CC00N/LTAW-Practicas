@@ -15,7 +15,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     const results = JSON.parse(xhr.responseText);
                     searchElements.innerHTML = "";
                     for (let i = 0; i < results.length; i++) {
-                        searchElements.innerHTML += `<button class='elementSearched' onclick="location.href=' ${results[i][1]}.html'"> ${results[i]} </button>`;
+                        //searchElements.innerHTML += `<button class='elementSearched' onclick="location.href=' ${results[i][1]}.html'"> ${results[i]} </button>`;
+                        searchElements.innerHTML += `<button class='elementSearched' onclick="location.href=' searchPage.html'"> ${results[i]} </button>`;
                     }
                     searchResults = results;
                 }

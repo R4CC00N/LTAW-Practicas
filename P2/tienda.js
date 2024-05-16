@@ -10,6 +10,7 @@ const fs = require('fs');
 const pag_error = "error.html"
 const pag_404 = fs.readFileSync(pag_error);
 const  ProductoDescripcion= fs.readFileSync('main.html','utf-8');
+const  ProductoPage= fs.readFileSync('searchPage.html','utf-8');
 
 // constantes de ficheros JSON
 const FICHERO_JSON = "tienda.json"
@@ -19,18 +20,14 @@ const usuarios = JSON.parse(tienda_json).usuarios;
 const productos = JSON.parse(tienda_json).productos;
 const OBJETOS = JSON.parse(tienda_json).objetos;
 
+// PRODUCTOS ID
+let idProduct=[];
 
 //Definición del puerto
 const PUERTO = 9090;
 
 
 ////////////////////////////////////////////////////////////////
-//// buscar en el GET //////
-function searchGET(req){
-  let productDir = req.url.split('?')[1];
-  console.log('dir: ', productDir)
-  return productDir
-}
 
 // FUNCION PARA LS
 function DirectoryLs(){
@@ -126,6 +123,18 @@ function ok200description(res,tipo,obj){
 
 };
 
+//////////////////////////////// CAMBIO DE CADA PRODUCTO ////////////////////////////////////////
+function ok200searchPage(res,tipo,id){
+
+  const data = ProductoPage.replace('<!--RAPLACE_PRODUCT-->',ShowProduct(id));
+    
+  console.log("Peticion Recibida, 200 OK");
+  res.writeHead(200, {'Content-Type': tipo});
+  res.write(data);
+  res.end();
+
+}
+
 function ok200(res,data,tipo){
 
   console.log("Peticion Recibida, 200 OK");
@@ -148,7 +157,8 @@ function info(req){
 ////////////////////////////////BUSCADOR////////////////////////////////
 function searchProducto (nameProduct){
   let result = [];
-
+  idProduct=[];
+// id para objeto buscado
   for (let prod of OBJETOS) {
       //console.log('nombres: ',prod.name)
       //-- Pasar a mayúsculas
@@ -158,8 +168,9 @@ function searchProducto (nameProduct){
       //-- meter este producto en el array de resultados
       if (prodU.startsWith(nameProduct)) {
           result.push([prod.name,prod.category]);
+          idProduct=prod.id
       }
-      
+      console.log('id:',idProduct)
   }
   return result;
 }
@@ -194,22 +205,33 @@ function ShowSearch(){
   `;
   return htmlProductos;
 }
-////////////////////////////////////////////////////////////////////////
+
+// FUNCION PARA MOSTRAR MENSAJE
+function ShowProduct(id){
+    htmlProductos = `
+    <div class="item">
+    <img class="fondo" src="${OBJETOS[id].img}">
+    <div class="content">
+        <div class="name">${OBJETOS[id].category}</div>
+        <div class="title">${OBJETOS[id].name}</div>
+        <div class="topic">${OBJETOS[id].descripcion} </div>
+        <div class="des">
+            <h1>${OBJETOS[id].caracteristics[0]}</h1>
+               ${OBJETOS[id].caracteristics[1]}
+            <h3> stock: ${OBJETOS[id].stock} </h3>
+            <h3> price: ${OBJETOS[id].price} $ </h3>
+        </div>
+        <div class="buttons">
+            <button class=replaceClass id="productButton" onclick="addToCart(${OBJETOS[id].id})"> ADD 🛒 </button>
+            <button ><a href="main.html">🏠 Home</a></button>
+        </div>
+    </div>
+</div>`;
+  return htmlProductos;
+}
 
 //////////////////////////// CARRITO DE COMPRA ////////////////////////////
-function userOK(user,password,usuarios){
-  found = false
-  card = ""
-  for (let i = 0; i <  usuarios.length; i++){
-    if(usuarios[i].nombre_usuario == user && usuarios[i].password == password ){
-      found = true;
-      card = usuarios[i].pedidos.card
-      console.log('TARJETA: ',usuarios[i].pedidos.card)
-      break;
-    }
-  }
-  return [found,card]
-}
+
 async function manageCart(data,cookies , callback){
   data = data.toString()
   if(cookies['user'] != null){
@@ -226,15 +248,18 @@ async function manageCart(data,cookies , callback){
             let id = key
             let stock = cartCookie[key]
             let componentData = findProductById(id)
+            // reemplazamos dependiendo de las cookies de los id que tengamos
             newComponent = newComponent.replace("TITTLE",componentData.name);
-            newComponent = newComponent.replace(/REPLACE_ID/,id);
-            newComponent = newComponent.replace(/PRICEUNIT/, String(componentData.price));
+            newComponent = newComponent.replace(/REPLACE_ID/g,id);
+            newComponent = newComponent.replace(/PRICEUNIT/g, String(componentData.price));
             newComponent = newComponent.replace("value='0'", "value='" + stock+"'");
             newComponent = newComponent.replace("TOTALPRICE", String(Number(stock) * Number(componentData.price)));
             newComponent = newComponent.replace("replaceMAX", componentData.stock);
+            // CONTEO DE PRECIO FINAL
             totalPrice += Number(stock) * Number(componentData.price)
             productsComponents += newComponent + "\n";
           }
+          // HTML QUE SE VE EN EL BUSCADOR
           const inputUI = "<div id=inputDataCart > <p class='textUserCart'>Tarjeta de crédito</p> \
           <input type='number' id='cardClient' class='userDataInput' placeholder='Introduce tu tarjeta de credito para completar el pago'/> \
           <p class='textUserCart' >Dirección de envio</p> <input id='dirClient' type='text' class='userDataInput' placeholder='Introduce tu direccion para completar el pago'/>\
@@ -264,54 +289,6 @@ async function manageCart(data,cookies , callback){
     callback(null,data)
   }
   
-}
-function manageProductData(data, id ,cookies){
-
-  data = data.toString()
-  if(cookies['userName'] != null){
-    data = data.replace("Log in",cookies['userName']);
-    data = data.replace("login.html", "profile.html");
-  }
-
-  for (let i = 0; i < OBJETOS.length; i++){
-      if (id ==  OBJETOS[i].id){
-        data = data.replace("placeholderTittle",  OBJETOS[i].name);
-        data = data.replace("placeholderImage", imagePath + String( OBJETOS[i].img[0]));
-        data = data.replace("placeholderIntro",  OBJETOS[i].descripcion);
-
-        data = data.replace("<!--placeholderWholePrice-->",  OBJETOS[i].price);
-        data = data.replace("<!--placeholderMonthPrice-->",  (OBJETOS[i].price/12).toFixed(2));
-
-        let reservedStock = 0
-
-        if(cookies['cart'] != null){
-          cartCookie = cookies['cart'].split(":")
-          cartCookie = convert2Dic(cartCookie,"_")
-          for (let key in cartCookie) {
-            if (key ==  OBJETOS[i].id){
-                reservedStock = Number(cartCookie[key])
-            }
-          }
-        }
-        let stock = OBJETOS[i].stock - reservedStock
-
-        data = data.replace("replaceStock",  stock);
-        if (stock > 0 ){
-          data = data.replace("replaceClass", "'buyButton' onclick='buyButton(REPLACE_ID);'");
-          data = data.replace("REPLACE_ID", id);
-          data = data.replace("replaceButtonText", "Añadir al carrito");
-        }else{
-          data = data.replace("replaceClass", "noStock");
-          data = data.replace("replaceButtonText", "Sin stock");
-        }
-        
-        for (let j = 0; j <  OBJETOS[i].caracteristics.length; j++){
-          data = data.replace("placeholderESP",  OBJETOS[i].caracteristics[j]);
-        }
-        break;
-      }
-  }
-  return data
 }
 
 
@@ -352,6 +329,9 @@ if(req.method=='GET'){
     lsDir=DirectoryLs();
     ok200(res,lsDir,tipo);
   }
+  else if(recurso=='/searchPage.html'){
+    ok200searchPage(res,tipo,idProduct)
+  }
   else if(recurso =='/product'){
     console.log("Peticion de Productos!")
     content_type = "application/json";
@@ -371,26 +351,6 @@ if(req.method=='GET'){
       ok200(res,content,tipo);
     }
   }
-  else if (recurso  == '/monitores.html'){
-    
-    ojo= searchGET(req);
-    
-    fs.readFile('monitores.html', (err, data) => { 
-      if(err){
-        console.log("Error!!")
-        console.log(err.message);
-        
-        res.write(pag_404);
-        res.end();
-
-    }else{          
-      cookies = getCookies(req)
-      console.log('dir: ',ojo);
-     // data = manageProductData(data,[result,product_id],cookies)
-      ok200(res,data,tipo)
-  }
-  });
-}
   else if (recurso == '/ProcesoPedido.html'){
     console.log('Page cart')
     fs.readFile("ProcesoPedido.html", (err, data) => { if(!err){
@@ -444,7 +404,7 @@ if(req.method=='GET'){
       //Si pasa por aqui, es debido a que hay un error y el id que se busca NO existe
         //Lanza error
         console.log("Error!!")
-        //console.log(err.message);
+        console.log(err.message);
     }
 
 }
