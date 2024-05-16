@@ -34,6 +34,17 @@ function searchGET(req){
   return productDir
 }
 
+// FUNCION PARA LS
+function DirectoryLs(){
+  // para LS
+  const files = fs.readdirSync('./');
+  ordFiles = '<p> DIRECTORIO </p>';
+  for (var i=0; i<files.length;i++){
+    ordFiles+='<p> * '+files[i]+'</p>'
+  }
+  return ordFiles
+}
+
 // Para hallar las cookies ojo
 function convert2Dic(params , split){
 
@@ -336,7 +347,12 @@ const server = http.createServer(function(req, res) {
   // console.log("URL: ",req.url)
 
 if(req.method=='GET'){
-  if(recurso =='/product'){
+  if(recurso=='/ls'){
+    //console.log('ENTRO EN LS')
+    lsDir=DirectoryLs();
+    ok200(res,lsDir,tipo);
+  }
+  else if(recurso =='/product'){
     console.log("Peticion de Productos!")
     content_type = "application/json";
     console.log("  url: " +  direccion);
@@ -356,6 +372,7 @@ if(req.method=='GET'){
     }
   }
   else if (recurso  == '/monitores.html'){
+    
     ojo= searchGET(req);
     
     fs.readFile('monitores.html', (err, data) => { 
