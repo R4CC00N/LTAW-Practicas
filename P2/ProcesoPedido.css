@@ -3,7 +3,7 @@ body{
     margin: 0;
     padding: 0;
     width: 100%;
-    background-color: #fafafa;
+    background: linear-gradient(15deg, #393939 50%, #181818 50.1%);
 }
 
 html {
@@ -16,199 +16,6 @@ html {
 }
 
 
-header{
-    height: auto;
-    position: fixed;
-    z-index: 5;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    width: 100%;
-    box-sizing: border-box;
-    color: #fafafa;
-    background-color: #111111;
-    opacity: 1;
-    animation: opacityLoad  1s normal backwards ease-in-out;
-    animation-delay: 3s;
-    animation-iteration-count: 1;
-    
-}
-
-
-.headerFormulary{
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    margin: auto;
-    text-align: center;
-}
-
-.headerFormulary .headerInputs{
-    height: auto;
-    display: flex;
-    flex-direction: row;
-    margin: auto;
-    margin-right: 0vw;
-    text-align: left;
-    width: 80%;
-    min-height: 4vh;
-}
-
-.headerFormulary .headerInputs .logButton{
-    margin-top: 1.5vh;
-    margin-bottom: 1vh;
-    margin-left: 1%;
-    border-radius: 8px;
-    font-weight: 550;
-    width: 7vw;
-    height: 3vh;
-    border: none;
-    color: #fafafa;
-    background-color: #363636;
-    font-size: large;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.headerFormulary .headerInputs .logButton:hover{
-    background-color: #555555;
-    color: #2b2b2b;
-}
-
-.headerFormulary .headerInputs .logButtonSearch{
-    margin-top: 1.5vh;
-    margin-bottom: 1vh;
-    margin-left: 0.5%;
-    margin-right: 10%;
-    border-radius: 8px;
-    font-weight: 550;
-    width: 3%;
-    height: 3vh;
-    border: none;
-    color: #fafafa;
-    font-size: large;
-    background-color: #363636;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.headerFormulary .headerInputs .logButtonSearch:hover{
-    background-color: #5e5e5e;
-    color: #2b2b2b;
-}
-
-.headerFormulary .headerInputs .searchDiv{
-    margin-bottom: 1vh;
-    display: flex;
-    height: max-content;
-    flex-direction: column;
-    width: 50%;
-    margin-left: 8.5%;
-
-}
-
-.headerFormulary .headerInputs .searchDiv .searchBar{
-    margin-top: 1.5vh;
-    margin-bottom: 1vh;
-    min-height: 3vh;
-    height: auto;
-    border-radius: 8px;
-    text-align: center;
-    border: none;
-    width: 100%;
-    font-size: large;
-    color: #fafafa;
-    background-color: #363636;
-}
-
-.headerFormulary .headerInputs .searchDiv #searchElements{
-    margin-top: 0.5%;
-    height: auto;
-    width: 100%;
-
-}
-
-.headerFormulary .headerInputs .searchDiv .elementSearched{
-    margin: auto;
-    margin-bottom: 1%;
-    width: 100%;
-    border: none;
-    border-radius: 32px;
-    color: #fafafa;
-    text-align: center;
-    border: solid 1px rgb(32, 32, 32);
-    border-radius: 16px;
-    background-color: #363636;
-    transition: background-color 0.3s ease, color 0.3s ease;
-
-
-}
-
-.headerFormulary .headerInputs .searchDiv .elementSearched:hover{
-    background-color: #b4b4b4;
-    color: #2b2b2b;
-}
-
-
-.headerMenu{
-    width: 100%;
-    min-height: 3vh;
-    height: auto;
-    text-align: center;
-    border-bottom: 1px solid #363636;
-    border-top: 1px solid #363636;
-    background-color: #000000;
-}
-
-
-.menuButton{
-    border-radius: 8px;
-    margin-top: 0.5vh;
-    margin-right: 1vw;
-    font-size: 0.80vw;
-    font-weight: 550;
-    width: 8vw;
-    border: none;
-    color: #fafafa;
-    background-color: #000000;
-    box-shadow: 0px 2px 2px rgba(62, 62, 62, 0.2),
-                0px -2px 2px rgba(62, 62, 62, 0.2),
-                2px  0px 2px rgba(62, 62, 62, 0.2),
-                -2px 0px 2px rgba(62, 62, 62, 0.2);
-                
-    transition: box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease
-}
-
-
-.menuButton:hover{
-    box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.2),
-                0px -3px 3px rgba(0, 0, 0, 0.3),
-                3px  0px 3px rgba(0, 0, 0, 0.3),
-                -3px 0px 3px rgba(0, 0, 0, 0.3);
-    color: #fafafa;
-    background-color: #363636;
-}
-
-.menuButton:active{
-    box-shadow: none;
-    color: #ffffff;
-    background-color: #000000;
-}
-
-#mainLogo{
-    text-align: left;
-    margin-left: 6vw;
-    margin-top: 0.5vh;
-    font-size: 3vh;
-    color: #ffffff;
-}
-
-#slogan{
-    text-align: left;
-    margin-left: 6.2vw;
-    margin-top: -2.6vh;
-    font-size: 1.2vh;
-    color: #ffffff;
-}
-
 /* BODY */
 
 
@@ -217,12 +24,9 @@ header{
     margin: auto;
     margin-top: 10vh;
     margin-bottom: 10vh;
-    font-size: 4vh;
     width: 100%;
     min-height: 65vh;
     text-align: center;
-    color: #3b3b3b;
-    background-color: #fafafa;
 }
 
 
@@ -233,144 +37,119 @@ header{
     height: auto;
 }
 
-#cartTittle{
-    text-align: left;
-    margin-left: 25%;
-    margin-top: 7%;
-    margin-bottom: 2vh;
-    font-size: 180%;
-    
+/*------lista de productos--------*/
+#TxtInfoPedido{
+    margin-top  : 8%;
+    margin-right  : 2%;
+    border-radius: 25px;
+    background: rgb(229, 229, 229);
+    color: rgb(0, 0, 0);
+    padding: 10px;
+    position: relative;
+    width: 500px;
+    font-size: 50px;
+    z-index: 1;
+    height: 200px;
+}
+#TxtInfoPedido::after{
+    content: '';
+    position: absolute;
+    bottom: 0; 
+    left: 0px;
+    background: transparent;
+    width: 80px; 
+    height: 80px;
+    border-bottom: 20px solid rgb(229, 229, 229);
+    border-right: 80px solid transparent;
+    border-left: 80px solid transparent;
+    transform: rotate(90deg);
+    z-index: -1;
+    }
+#img_buy{
+    width: 20%;
+    height: 20%;
+    border: 5px rgb(149, 255, 117) solid;
+    border-radius: 18px;
+    margin-left: 20%;
+    margin-top: 20%;
+    transform: scaleX(-1);
 }
 
-#showCart #productDiv{
+#showCart #productDiv {
    text-align: right;
    display: flex;
    flex-direction: column;
-   width: 60%;
+   width: 80%;
+   height: 800px; /* Establece una altura fija para permitir el scroll */
    margin-top: 2%;
-   margin-left: 2%;
-   border-left: 2px solid rgb(110, 110, 110);
+   margin-right: 5%;
+   border-left: 3px solid rgb(255, 0, 0);
+   background-color: rgba(231, 231, 231, 0.861);
+   overflow-y: auto; /* Añade una barra de desplazamiento vertical si es necesario */
+   font-size: 30px;
+   
 }
 
 
-#cartButton{
-    margin: auto;
-    margin-top: 1%;
-    margin-left: 18%;
-    height: auto;
+/*-----------BOTONES-----------*/
+.buttonPos{
+    margin-top: 2%;
+}
+.buttonPos #cartButton{
+    font-size: 50px;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
     border: none;
-    border-radius: 8px;
-    font-size: 4vh;
-    background-color: #4a64f8;
-    color:#fafafa;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.082), 0 -4px 4px rgba(0, 0, 0, 0.034);
-    transition: background-color 0.3s ease,  box-shadow 0.3s ease , border-radius 0.3s ease , font-size 0.3s ease;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-#cartButton:hover{
-    border-radius: 16px;
-    font-size: 4.5vh;
-
-    background-color: #415dfa;
-    box-shadow: 0 6px 6px rgba(0, 0, 0, 0.247), 0 -6px 6px rgba(0, 0, 0, 0.233);
+.buttonPos #cartButton:hover{
+    background-color: #0056b3;
 }
 
+/*------------- DIVISION TARJETA Y DIRECCION--------------*/
 #showCart #inputDataCart{
    display: flex;
    flex-direction: column;
-   width: 65%;
+   width: 100%;
    height: 30vh;
-   font-size: 50%;
-   border-top: 2px solid #474747;
+   font-size: 30px;
+   border-top: 3px solid #ff0000;
    margin-bottom: 1%;
+   
 }
 
 #showCart #inputDataCart .userDataInput{
     margin: auto;
     margin-left: 3%;
     font-weight: 600;
-    width: 92.5%;
+    width: 90%;
     height: 30%;
-    font-size: 80%;
+    font-size: 30px;
     text-align: center;
     border-radius: 16px;
     border: none;
-
-    box-shadow: 0px 2px 2px rgba(62, 62, 62, 0.2),
-                0px -2px 2px rgba(62, 62, 62, 0.2),
-                2px  0px 2px rgba(62, 62, 62, 0.2),
-                -2px 0px 2px rgba(62, 62, 62, 0.2);
+    background-color: rgba(168, 168, 168, 0.261);
 }
 
 #showCart #inputDataCart .textUserCart{
     font-weight: 300;
-    font-size: 200%;
+    font-size: 30px;
     margin: auto;
     margin-top: 2%;
     margin-bottom: 2%;
     margin-left: 3%;
     text-align: left;
+    
 }
-
-#showCart #inputDataCart #feedbackText{
-    text-align: center;
-    color: rgb(202, 32, 32);
-    font-weight: 600;
-}
-
-.cartProductId{
-
-    width: 60%;
-    margin-bottom: 2%;
-    margin-left: 2%;
-    height: auto;
-    border-radius: 16px;
-    box-shadow: 0px 2px 2px rgba(62, 62, 62, 0.2),
-                0px -2px 2px rgba(62, 62, 62, 0.2),
-                2px  0px 2px rgba(62, 62, 62, 0.2),
-                -2px 0px 2px rgba(62, 62, 62, 0.2);
-}
-
-#cartProductButton{
-    background-color: #fafafa;
-    text-align: center;
-    color: rgb(228, 10, 10);
-    font-size: 80%;
-    font-weight: 700;
-    border: 1px solid rgb(228, 10, 10);
-    border-radius: 8px;
-    height: 3.8vh;
-    width: 3.8vh;
-    margin: auto;
-    margin-left: 10%;
-    transition: background-color 0.3s ease, color 0.3s ease , box-shadow 0.2s ease;
-    box-shadow: 0px 2px 2px rgba(62, 62, 62, 0.1),
-                0px -2px 2px rgba(62, 62, 62, 0.1),
-                2px  0px 2px rgba(62, 62, 62, 0.1),
-                -2px 0px 2px rgba(62, 62, 62, 0.1);
-}
-
-#cartProductButton:hover{
-    background-color: rgb(228, 10, 10);
-    color: #fafafa;
-    box-shadow: 0px 4px 4px rgba(62, 62, 62, 0.2),
-                0px -4px 4px rgba(62, 62, 62, 0.2),
-                4px  0px 4px rgba(62, 62, 62, 0.2),
-                -4px 0px 4px rgba(62, 62, 62, 0.2);
-}
-
-#cartProductButton:active {
-    box-shadow: 0px 2px 2px rgba(62, 62, 62, 0.1),
-                0px -2px 2px rgba(62, 62, 62, 0.1),
-                2px  0px 2px rgba(62, 62, 62, 0.1),
-                -2px 0px 2px rgba(62, 62, 62, 0.1);
-}
-
 #cartProductName{
-    text-align: left;
-    margin-top: 4%;
-    margin-left: 4%;
-    font-size: 90%;
+    font-size: 35px;
+    font-weight: bold;
+    margin-right: 50px;
 }
 
 #cartProductPriceDiv{
@@ -387,7 +166,7 @@ header{
     margin: auto;
     margin-left: 0;
     margin-bottom: 10%;
-    font-size: 80%;
+    font-size: 30px;
 }
 
 
@@ -396,7 +175,7 @@ header{
     margin: auto;
     margin-left: 0;
     margin-bottom: 10%;
-    font-size: 80%;
+    font-size: 30px;
 }
 
 #cartProductPriceDiv .cartProductPrice3{
@@ -404,18 +183,17 @@ header{
     margin: auto;
     margin-left: 0;
     margin-bottom: 10%;
-    font-size: 80%;
+    font-size: 30px;
 }
 
 #cartProductPriceDiv .cartProductInput{
     text-align: center;
     margin: auto;
-    margin-left: 0;
-    margin-right: 0;
-    border-radius: 16px;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 6px;
     height: 40%;
-    font-size: 60%;
-    color: #4a64f8;
+    font-size: 30px;
     margin-bottom: 10%;
 }
 

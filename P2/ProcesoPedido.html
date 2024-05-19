@@ -5,26 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/ico" href="img/icon.ico"/> 
     <script type="text/javascript" src="ProcesoPedido.js"></script>
+    <link rel="stylesheet" href="ProcesoPedido.css" defer> 
     <title>Proceso Pedido</title>
 </head>
 <body>
 
-    <img src="img/Foto_perfil.jpeg" alt="error404">    
+    
 
-    <p>
-    Una vez que el usuario ya ha metido productos en el carrito, 
-    pinchará en una opción para finalizar la compra. La tienda mostrará una 
-    página con el contenido actual del carrito y un formulario para solicituar 
-    al usuario los siguientes datos adicionales: dirección de envío y número de 
-    tarjeta para realizar el pago. Una vez introducidos, la tienda confirmará 
-    que el pedido se ha realizado y almacenará este pedido en la base de 
-    datos (fichero tienda.json)
-    </p>
     <div class="mainBody">
         <div id="showCart">
             <!--REPLACE_PRODUCTS-->
         </div>
-        <button id="cartButton"  extraStyle='' onclick="REPLACE_URL">REPLACE_TEXT</button>
+        <div class="buttonPos">
+            <button id="cartButton"><a href="main.html">🏠 Home</a></button>
+            <button id="cartButton"  extraStyle='' onclick="REPLACE_URL">REPLACE_TEXT</button>
+        </div>
     </div>
 </body>
 </html>

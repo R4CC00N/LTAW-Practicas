@@ -241,7 +241,7 @@ async function manageCart(data,cookies , callback){
           component = component.toString()
           cartCookie = cookies['cart'].split(":")
           cartCookie = convert2Dic(cartCookie,"_")
-          productsComponents = "<p id='cartTittle'>Lista de productos</p> \n <div id='productDiv' >"
+          productsComponents = "<img id='img_buy' src='img/error404.png' alt='buy'>\n <p id='TxtInfoPedido'>Lista de productos</p> \n <div id='productDiv' >"
           totalPrice = 0
           for (let key in cartCookie) {
             newComponent = component
@@ -261,7 +261,7 @@ async function manageCart(data,cookies , callback){
           }
           // HTML QUE SE VE EN EL BUSCADOR
           const inputUI = "<div id=inputDataCart > <p class='textUserCart'>Tarjeta de crédito</p> \
-          <input type='number' id='cardClient' class='userDataInput' placeholder='Introduce tu tarjeta de credito para completar el pago'/> \
+          <input id='dirClient' type='text' class='userDataInput' placeholder='Introduce tu tarjeta de credito para completar el pago'/> \
           <p class='textUserCart' >Dirección de envio</p> <input id='dirClient' type='text' class='userDataInput' placeholder='Introduce tu direccion para completar el pago'/>\
           <p id='feedbackText'></p> </div>"
           productsComponents += " <p id='totalPriceFinal'> Total: " + String(totalPrice) + " € </p>" + inputUI + "</div> " ;
@@ -274,7 +274,7 @@ async function manageCart(data,cookies , callback){
       
 
     }else{
-      data = data.replace("<!--REPLACE_PRODUCTS-->", "<p id='cartTittle' style='margin: auto; margin-top: 2%'> No tienes ningun producto en la cesta :( </p>");
+      data = data.replace("<!--REPLACE_PRODUCTS-->", "<p id='TxtInfoPedido' style='margin: auto; margin-top: 2%'> No tienes ningun producto en la cesta :( </p>");
       data = data.replace("extraStyle=''","style='margin: auto; margin-top: 2%'");
       data = data.replace("REPLACE_TEXT","Volver a la pagina de inicio");
       data = data.replace("REPLACE_URL","location.href='/';");
@@ -282,7 +282,7 @@ async function manageCart(data,cookies , callback){
     }
     
   }else{
-    data = data.replace("<!--REPLACE_PRODUCTS-->"," <p id='cartTittle'  style='margin: auto; margin-top: 2%'> Inicia sesión para poder realizar la compra </p>");
+    data = data.replace("<!--REPLACE_PRODUCTS-->"," <p id='TxtInfoPedido'  style='margin: auto; margin-top: 2%'> Inicia sesión para poder realizar la compra </p>");
     data = data.replace("extraStyle=''","style='margin: auto; margin-top: 2%'");
     data = data.replace("REPLACE_URL","location.href='login.html';");
     data = data.replace("REPLACE_TEXT","Inicia sesion");
