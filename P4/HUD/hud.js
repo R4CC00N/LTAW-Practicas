@@ -31,6 +31,9 @@ electron.ipcRenderer.on('conectionInformation' , (event,message) => {
     document.getElementById("nodeText").innerHTML = process.versions.node
     document.getElementById("chromeText").innerHTML = process.versions.chrome
     document.getElementById("electronText").innerHTML = process.versions.electron
+    document.getElementById("textPc_arc").innerHTML = process.arch
+    document.getElementById("textPc_plt").innerHTML = process.platform
+    document.getElementById("textPc_dir").innerHTML = process.cwd();
 })
 
 

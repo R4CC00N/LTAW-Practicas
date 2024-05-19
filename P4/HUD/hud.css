@@ -116,7 +116,7 @@ body{
 
     color: rgb(144, 255, 47);
     margin: auto;
-    margin-top: -5%;
+    margin-top: -15%;
     margin-left: 15%;
     font-size: 220%;
     font-weight: 900;
@@ -224,3 +224,66 @@ body{
     -ms-transform: scale(0.95);
     transform: scale(0.95);
   }
+  .messageClassDiv1{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-left: 5%;
+    margin-bottom: 3%;
+    border: 3px solid rgb(195, 85, 156);
+    background-color: rgb(105, 39, 82);
+    border-radius: 16px;
+    width: 30%;
+  }
+  .messageClassDiv2{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    align-items: center;
+    margin-top: 5%;
+    margin-bottom: 3%;
+    border: 3px solid rgb(251, 254, 163);
+    background-color: rgba(118, 181, 36, 0.496);
+    border-radius: 16px;
+    width: 40%;
+  }
+  .invisibleDiv{
+    background-color: green;
+  }
+
+  /* ------------------ CHAT GENERAL --------------------- */
+
+  #typeChat{
+    position: absolute;
+    top: -3%;
+    left: 0;
+    right:0 ;
+    z-index: 1;
+    margin: auto;
+    border-radius: 32px;
+    text-align: center;
+    width: 50%;
+    height: 50px;
+    background: linear-gradient(rgb(35, 89, 100), rgb(58, 129, 145));
+}
+#typeChat #typeChatTitle{
+    height: fit-content;
+    margin: auto;
+    margin-top: 5%;
+    font-size: 150%;
+    font-weight: 700;
+    width: fit-content;
+    height: fit-content;
+    color: rgb(187, 255, 109);
+  }
+  #smallChatDivDiv{
+  
+    margin: auto;
+    background: linear-gradient(rgb(37, 66, 72), rrgb(90, 130, 139));
+    border: 3px solid rgba(0, 0, 0, 0.475);
+    box-sizing: border-box;
+    border-radius: 10px 10px 0px 0px;
+    height: 85%;
+    width: 100%;
+    overflow: auto;
+}

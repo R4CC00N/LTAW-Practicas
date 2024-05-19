@@ -253,8 +253,8 @@ io.on('connect', (socket) => {
 
             }else{
 
-                destinatary = trozos[0]
-                trozos[0] = socket.id
+                destinatary = msg[0]
+                msg[0] = socket.id
                 io.to(destinatary).emit('message', JSON.stringify(msg));
             }
             
