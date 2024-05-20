@@ -211,7 +211,7 @@ socket.on("connect_login", (msg)=> {
     
         if (trozos[3] == "/"){
             //console.log('trozos: ',trozos)
-            console.log('socket: ',socket)
+            //console.log('socket: ',socket)
           specialCommand(trozos[2], socket , trozos[1] , trozos[0])
           
         }else{

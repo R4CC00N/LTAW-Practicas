@@ -9,6 +9,7 @@ let STATE_BASE = {general:"<div class='invisibleDiv'></div>"}
 let STATE = "general"
 let ListaUsuarios = []
 
+let sound = new Audio('public/click.mp3');
 
 //Manage Server-client responses
 socket.on("connect", () => {
@@ -93,6 +94,7 @@ socket.on("message", (msg)=>{
 
   }else{
     // AGREGAR SONIDO AQUI
+    sound.play();
     STATE_BASE[msg[0]] += "<div class='TypeMessage1'> <p class='TimeText'> <span class='userName'>"+ msg[1] +"</span> <span class='messDate'>"+FechaHora()+"</span>  </p> <p class='chatText' >"+ msg[2] +"</p> </div>"
   }
 
