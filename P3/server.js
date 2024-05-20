@@ -25,7 +25,8 @@ let clients = []
 const ayuda = `Comandos Disponibles: 
 <br> ➤ /list: Muestra la lista con los usuarios conectados
 <br> ➤ /hello: Muestra mensaje de saludo
-<br> ➤ /date: Muestra la fecha acrual`
+<br> ➤ /date: Muestra la fecha acrual
+<br> ➤ /info: Muestra su informacion de sistema`
 
 let respuesta_ayuda = "Lista de usuarios conectados:"
 
@@ -109,7 +110,9 @@ function specialCommand(comand, socket , nameClient ,idClient){
       case "/date":
           socket.emit("message" , JSON.stringify([idClient ,"server", getDate()]))
           break;
-  
+      case "/info":
+            socket.emit("message" , JSON.stringify([idClient ,"server", 'Usted esta en: '+process.platform+' con arquitectura: '+process.arch]))
+           break;
       default:
           socket.emit("message" , JSON.stringify([idClient ,"server","Comando invalido, escribe /help para conocer todas las opciones"]))
           break;
